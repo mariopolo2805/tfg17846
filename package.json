@@ -3,6 +3,10 @@
     "version": "0.0.1",
     "author": "Mario Antonio Polo Daza",
     "description": "Desarrollo en Android de un sistema de respuesta inmediata con clickers para uso educativo",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mariopolo2805/tfg17846.git"
+    },
     "license": "UNLICENSED",
     "private": true,
     "dependencies": {

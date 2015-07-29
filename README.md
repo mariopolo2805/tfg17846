@@ -5,8 +5,8 @@ Autor: Mario Antonio Polo Daza
 
 -------------------------------------------------------------
 
-Para ejecutar el servidor Node utilizar el siguiente comando:
+El servidor Node se lanza mediante:
 
 > npm start
 
-El servidor escucha en http://localhost:9000.
+El servidor se crea en http://localhost:9000

@@ -1,0 +1,22 @@
+{
+    "name": "ClickEPS",
+    "version": "0.0.1",
+    "author": "Mario Antonio Polo Daza",
+    "description": "Desarrollo en Android de un sistema de respuesta inmediata con clickers para uso educativo",
+    "license": "UNLICENSED",
+    "private": true,
+    "dependencies": {
+        "angular": "1.4.0",
+        "angular-bootstrap-npm" : "0.13.0",
+        "angular-ui-router" : "0.2.15",
+        "express" : "4.12.4",
+        "jquery": "2.1.4",
+        "less-middleware" : "2.0.1",
+        "mysql": "2.8.0",
+        "requirejs": "2.1.18"
+    },
+    "scripts" : {
+        "prestart": "npm install",
+        "start": "node server"
+    }
+}

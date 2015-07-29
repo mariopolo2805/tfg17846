@@ -1,0 +1,58 @@
+/*------------------------------------------------------------------
+[BASE]
+
+* border-box
+
+* html
+
+* body
+
++ Text
+    - Headers / h1, h2, h3, h4, h5, h6
+    - Links / status: link, visited, hover, active
+
++ Lists
+    - Undordered / ul
+
+
+-------------------------------------------------------------------*/
+
+
+*, *:after, *:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+
+/*--  [Body]  -----------------------------------------------------*/
+body {
+    margin: 0;
+    overflow: hidden;
+    height: 100%;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+
+/*--  [Text]  -----------------------------------------------------*/
+h1, h2, h3, h4, h5, h6, p { margin: 0; }
+
+h2 {
+    margin-bottom: 16px;
+}
+
+a {
+    &:link, &:visited, &:hover, &:active { outline: none; }
+}
+
+/*--  [Lists]  ----------------------------------------------------*/
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}

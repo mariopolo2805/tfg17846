@@ -25,3 +25,8 @@ define([
         })
         .controller('LoginCtrl', controller.LoginCtrl);
 });
+
+this.hide = function() {
+    var div = document.getElementById("landing-page");
+    div.style.display = "none";
+}

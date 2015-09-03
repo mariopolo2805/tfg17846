@@ -17,13 +17,19 @@
 
     <body>
 
-        <header>ClickEPS</header>
+        <header>
+            <h2>ClickEPS</h2>
+        </header>
 
-        <a ui-sref="root.login">Login</a>
+        <div id="landing-page" class="landing-page">
+            <a ui-sref="root.login" onclick="hide()">Login</a>
+        </div>
 
         <section ui-view></section>
 
-        <footer>UAM</footer>
+        <footer>
+            <h2>UAM</h2>
+        </footer>
 
     </body>
 

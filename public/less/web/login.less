@@ -1,0 +1,46 @@
+/*------------------------------------------------------------------
+[LOGIN]
+
++ .login-layout
+
+-------------------------------------------------------------------*/
+
+.login-layout {
+    .flex-display();
+    .flex-direction(column);
+    .justify-content(center);
+    .align-items(center);
+    .border-radius(30px);
+    background: @primary;
+    height: 300px;
+    width: 400px;
+
+    h2 {
+        .typ22-600-a;
+        margin-bottom: 40px;
+    }
+}
+
+.login-form {
+    .flex-display();
+    .flex-direction(column);
+    .justify-content(center);
+    .align-items(center);
+
+    label {
+        .typ18-400-a;
+        margin-bottom: 6px;
+    }
+
+    input {
+        margin-bottom: 10px;
+        width: 260px;
+
+        &[type="submit"] {
+            height: 30px;
+            width: 100px;
+            .border-radius(5px);
+            margin-top: 30px;
+        }
+    }
+}

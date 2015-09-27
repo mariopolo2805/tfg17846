@@ -22,28 +22,22 @@ app.use('/lib', express.static('node_modules'));
 
 // Create the server in http://localhost:9000/
 var server = app.listen(9000, function () {
-  var port = server.address().port;
+    var port = server.address().port;
 
-  console.log('Server listening at http://localhost:%s', port);
+    console.log('Server listening at http://localhost:%s', port);
 });
-
-
-
-
 
 /***********************
  * MySQL configuration *
  ***********************/
 
-var mysql      = require('mysql');
+var mysql = require('mysql');
 var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'mariopolo2805',
-  password : 'tfg17846',
-  database : 'tfg'
+    host     : 'localhost',
+    user     : 'mariopolo2805',
+    password : 'tfg17846',
+    database : 'tfg'
 });
-
-/* testing database */
 
 connection.connect();
 

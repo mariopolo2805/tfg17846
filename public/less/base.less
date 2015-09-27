@@ -19,20 +19,10 @@
 + Lists
     - Undordered / ul
 
-+ Flexbox
-    .flex-display(@display: flex)
-    .flex(@columns: initial)
-    .flex-direction(@direction: row)
-    .flex-wrap(@wrap: nowrap)
-    .flex-flow(@flow)
-    .flex-order(@order: 0)
-    .flex-grow(@grow: 0)
-    .flex-shrink(@shrink: 1)
-    .flex-basis(@width: auto)
-    .justify-content(@justify: flex-start)
-    .align-content(@align: stretch)
-    .align-items(@align: stretch)
-    .align-self(@align: auto)
++ Buttons
+    - .button
+    - button
+    - input[type="submit"]
 
 
 -------------------------------------------------------------------*/
@@ -74,7 +64,8 @@ header {
     width: 100%;
     height: 30px;
     padding-top: 5px;
-    background: @primary;
+    background: @green-light;
+    border: 1px solid @border;
 }
 
 footer {
@@ -83,7 +74,8 @@ footer {
     width: 100%;
     height: 30px;
     padding-top: 5px;
-    background: @primary;
+    background: @green-light;
+    border: 1px solid @border;
     position: fixed;
     bottom: 0;
 }
@@ -100,4 +92,19 @@ ul {
     padding: 0;
     margin: 0;
     list-style: none;
+}
+
+/*--  [Buttons]  --------------------------------------------------*/
+
+.button, button, input[type="submit"] {
+    background-color: @green-medium;
+    .typ18-400-d;
+    text-decoration: none;
+    .border-radius(10px);
+    border: 1px solid @border;
+    cursor: pointer;
+    padding: 6px 25px 4px 25px;
+}
+.button:hover, button:hover, input[type="submit"]:hover {
+    background-color: @green-dark;
 }

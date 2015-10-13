@@ -1,22 +1,18 @@
 define([], function(){
     'use strict';
 
-    function LoginCtrl(){
+    function LoginCtrl($http) {
         var vm = this;
 
         vm.name = "LOGIN";
 
-        console.log("Mirar la pagina de Firefox");
+        console.log("Query");
 
-        // QUERY
-        // mysql.query('SELECT * FROM User', function(err, rows, fields) {
-        //     if (!err)
-        //         console.log('The solution is: ', rows);
-        //     else
-        //         console.log('Error while performing Query.');
-        // });
-        // mysql.end();
-        // QUERY
+        $http.get('http://localhost:9000/login').success(function(data) {
+            console.log(data);
+        });
+
+        console.log("Query");
 
     }
 

@@ -4,9 +4,9 @@ var express         = require('express');
 var lessMiddleware  = require('less-middleware');
 var app             = express();
 
-/*************************
- * Routing configuration *
- *************************/
+/************************
+* Routing configuration *
+*************************/
 
 // Compile less and store CSS in target/public
 app.use(lessMiddleware('public', { dest : 'public' }));
@@ -16,9 +16,9 @@ app.use(express.static('public'));
 app.use('/lib', express.static('node_modules'));
 
 
-/************************
- * Server configuration *
- ************************/
+/***********************
+* Server configuration *
+***********************/
 
 // Create the server in http://localhost:9000/
 var server = app.listen(9000, function () {
@@ -27,9 +27,10 @@ var server = app.listen(9000, function () {
     console.log('Server listening at http://localhost:%s', port);
 });
 
-/***********************
- * MySQL configuration *
- ***********************/
+
+/**********************
+* MySQL configuration *
+**********************/
 
 var mysql = require('mysql');
 var connection = mysql.createConnection({
@@ -39,13 +40,31 @@ var connection = mysql.createConnection({
     database : 'tfg'
 });
 
-connection.connect();
+// connection.connect();
 
-connection.query('SELECT * FROM User', function(err, rows, fields) {
-  if (!err)
-    console.log('The solution is: ', rows);
-  else
-    console.log('Error while performing Query.');
+// connection.query('SELECT * FROM User', function(err, rows, fields) {
+//   if (!err)
+//     console.log('The solution is: ', rows);
+//   else
+//     console.log('Error while performing Query.');
+// });
+
+// connection.end();
+
+/***************
+* MySQL QUERYS *
+***************/
+
+app.get('/#/login', function(req, res) {
+    res.sendfile('login/login.html');
 });
 
-connection.end();
+app.post('/login', function(req, res) {
+    connection.query("SELECT * FROM User", function(err, rows) {
+        if(err) {
+            console.log("Problem with MySQL" + err);
+        } else {
+            res.end(JSON.stringify(rows));
+        }
+    });
+});

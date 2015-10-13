@@ -23,7 +23,7 @@ define([
                 });
 
         })
-        .controller('LoginCtrl', controller.LoginCtrl);
+        .controller('LoginCtrl', ['$http', controller.LoginCtrl]);
 });
 
 this.hide = function() {

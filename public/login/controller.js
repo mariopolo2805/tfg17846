@@ -6,9 +6,15 @@ define([], function(){
 
         vm.name = "LOGIN";
 
+        var req = {
+            method: 'POST',
+            url: 'http://localhost:9000/login',
+            params: { user: 'marioantonio.polo@estudiante.uam.es' }
+        }
+
         console.log("Query");
 
-        $http.get('http://localhost:9000/login').success(function(data) {
+        $http(req).success(function(data) {
             console.log(data);
         });
 

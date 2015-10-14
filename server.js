@@ -60,7 +60,9 @@ app.get('/#/login', function(req, res) {
 });
 
 app.post('/login', function(req, res) {
-    connection.query("SELECT * FROM User", function(err, rows) {
+    var user = req.query.user;
+    var query = "SELECT * FROM User WHERE email='" + user + "'";
+    connection.query(query, function(err, rows) {
         if(err) {
             console.log("Problem with MySQL" + err);
         } else {

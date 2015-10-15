@@ -40,16 +40,6 @@ var connection = mysql.createConnection({
     database : 'tfg'
 });
 
-// connection.connect();
-
-// connection.query('SELECT * FROM User', function(err, rows, fields) {
-//   if (!err)
-//     console.log('The solution is: ', rows);
-//   else
-//     console.log('Error while performing Query.');
-// });
-
-// connection.end();
 
 /***************
 * MySQL QUERYS *
@@ -59,14 +49,14 @@ app.get('/#/login', function(req, res) {
     res.sendfile('login/login.html');
 });
 
-app.post('/login', function(req, res) {
-    var user = req.query.user;
+app.post('/login/:user', function(req, res) {
+    var user = req.params.user;
     var query = "SELECT * FROM User WHERE email='" + user + "'";
     connection.query(query, function(err, rows) {
         if(err) {
             console.log("Problem with MySQL" + err);
         } else {
-            res.end(JSON.stringify(rows));
+            res.send(JSON.stringify(rows[0]));
         }
     });
 });

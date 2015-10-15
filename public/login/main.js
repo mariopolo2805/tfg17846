@@ -16,9 +16,6 @@ define([
                             controller: 'LoginCtrl',
                             controllerAs: 'vm'
                         }
-                        /*'typography@root.elements': {
-                            templateUrl: '/elements/views/typography.html'
-                        }*/
                     }
                 });
 

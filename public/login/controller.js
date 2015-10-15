@@ -4,21 +4,16 @@ define([], function(){
     function LoginCtrl($http) {
         var vm = this;
 
-        vm.name = "LOGIN";
+        vm.email = "marioantonio.polo@estudiante.uam.es";
 
         var req = {
             method: 'POST',
-            url: 'http://localhost:9000/login',
-            params: { user: 'marioantonio.polo@estudiante.uam.es' }
+            url: 'http://localhost:9000/login/' + vm.email
         }
-
-        console.log("Query");
 
         $http(req).success(function(data) {
             console.log(data);
         });
-
-        console.log("Query");
 
     }
 

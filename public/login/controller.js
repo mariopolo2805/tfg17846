@@ -5,15 +5,22 @@ define([], function(){
         var vm = this;
 
         vm.email = "marioantonio.polo@estudiante.uam.es";
+        vm.password = "";
 
-        var req = {
-            method: 'POST',
-            url: 'http://localhost:9000/login/' + vm.email
+        vm.submit = function() {
+            var req = {
+                method: 'POST',
+                url: 'http://localhost:9000/login/' + vm.email
+            }
+
+            $http(req).success(function(data) {
+                if(data.password === vm.password) {
+                    console.log("Password correcta!");
+                } else {
+                    console.log("Error en login");
+                }
+            });
         }
-
-        $http(req).success(function(data) {
-            console.log(data);
-        });
 
     }
 

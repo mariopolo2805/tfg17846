@@ -8,7 +8,7 @@ define([
         .module('tfg.login', ['ui.router'])
         .config(function($stateProvider, $urlRouterProvider){
             $stateProvider
-                .state('root.login', {
+                .state('wrapper.login', {
                     url: '/login',
                     views: {
                         '': {
@@ -18,12 +18,6 @@ define([
                         }
                     }
                 });
-
         })
         .controller('LoginCtrl', ['$http', controller.LoginCtrl]);
 });
-
-this.hide = function() {
-    var div = document.getElementById("landing-page");
-    div.style.display = "none";
-}

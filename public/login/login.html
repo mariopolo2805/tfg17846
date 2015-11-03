@@ -7,14 +7,17 @@
 
 <div class="login-layout">
 
-    <h2>LOGIN</h2>
+    <h2 class="title">LOGIN</h2>
 
     <form class="login-form" ng-submit="vm.submit()">
         <label for="mail">Correo</label>
         <input type="mail" name="mail" ng-model="vm.email" required></input>
         <label for="password">Contraseña</label>
         <input type="password" name="password" ng-model="vm.password" required></input>
-        <input type="submit" class="submit" value="Entrar"></input>
+        <button class="submit">
+            <input type="submit" value="Entrar"></input>
+            <img src="resources/icons/login.png">
+        </button>
     </form>
 
 </div>

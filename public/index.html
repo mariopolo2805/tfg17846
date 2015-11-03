@@ -15,24 +15,7 @@
         <script data-main="main.js" type="text/javascript" src="lib/requirejs/require.js"></script>
     </head>
 
-    <body>
-
-        <header>
-            <h2>ClickEPS</h2>
-        </header>
-
-        <div id="landing-page" class="landing-page">
-            <img class="eps-logo" src="resources/eps-logo.png" alt="Logo EPS">
-            <a class="button" ui-sref="root.login" onclick="hide()">LOGIN</a>
-            <img class="uam-logo" src="resources/uam-logo.png" alt="Logo UAM">
-        </div>
-
-        <section ui-view></section>
-
-        <footer>
-            <h2>UAM</h2>
-        </footer>
-
+    <body ui-view="wrapper">
     </body>
 
 </html>

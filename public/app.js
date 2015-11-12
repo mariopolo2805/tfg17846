@@ -2,7 +2,8 @@ define([
     'angular',
     'ui-bootstrap',
     'landingPage/main',
-    'login/main'
+    'login/main',
+    'mainMenu/main'
 ], function(angular, directivesDecorators){
     'use strict';
 
@@ -10,7 +11,8 @@ define([
         'ui.bootstrap',
         'ui.router',
         'tfg.landing',
-        'tfg.login'
+        'tfg.login',
+        'tfg.mainMenu'
     ])
     .config(function($stateProvider, $urlRouterProvider) {
 

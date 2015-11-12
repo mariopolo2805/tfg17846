@@ -63,11 +63,13 @@ main {
     height: 100%;
 }
 
-section {
+section, ui-view {
     .flex-display();
     .flex-direction(column);
     .justify-content(center);
     .align-items(center);
+    width: 980px;
+    height: 100%;
 }
 
 header {
@@ -119,12 +121,7 @@ ul {
 }
 
 /*--  [Buttons]  --------------------------------------------------*/
-input[type="submit"] {
-    background-color: @green-medium;
-    border: none;
-}
-
-.button, button {
+button, .button {
     .border-radius(10px);
     padding: 6px 25px 4px 25px;
     border: 1px solid @border;
@@ -137,9 +134,14 @@ input[type="submit"] {
         top: 1px;
     }
 }
-.button:hover, button:hover {
+button:hover, .button:hover {
     background-color: @green-dark;
     input {
         background-color: @green-dark;
     }
+}
+
+input[type="submit"] {
+    background-color: @green-medium;
+    border: none;
 }

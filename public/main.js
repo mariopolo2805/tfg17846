@@ -1,7 +1,6 @@
 (function (requirejs){
     'use strict';
 
-    // -- RequireJS config
     requirejs.config({
 
         baseUrl: '',
@@ -10,7 +9,8 @@
             'jquery': ['lib/jquery/dist/jquery'],
             'angular': ['lib/angular/angular'],
             'ui-router': ['lib/angular-ui-router/release/angular-ui-router'],
-            'ui-bootstrap': ['lib/angular-bootstrap-npm/dist/angular-bootstrap']
+            'ui-bootstrap': ['lib/angular-bootstrap-npm/dist/angular-bootstrap'],
+            'underscore': ['lib/underscore/underscore-min'],
         },
 
         shim: {
@@ -20,7 +20,10 @@
             },
             'ui-router': ['angular'],
             'bootstrap': ['jquery'],
-            'ui-bootstrap': ['angular']
+            'ui-bootstrap': ['angular'],
+            'underscore': {
+                exports: '_'
+            },
         }
     });
 
@@ -33,6 +36,7 @@
         'angular',
         'ui-router',
         'ui-bootstrap',
+        'underscore',
         './app'
     ], function(angular){
             angular.bootstrap(document, ['app']);

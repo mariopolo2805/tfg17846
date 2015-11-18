@@ -1,13 +1,33 @@
 <div class="main-menu-layout">
-    <aside class="main-menu-left">
-        Left
+    <aside>
+        <div class="menu-options">
+            <span class="menu-options-title">Asignaturas</span>
+            <ul ng-repeat="name in vm.subjects">
+                <li class="hover" ng-click="vm.subject(name)">{{name}}</li>
+            </ul>
+        </div>
+        <div class="menu-options">
+            <span class="menu-options-title">Temas</span>
+            <div class="menu-options-selectAll">
+                <span>Seleccionar todos</span>
+                <input type="checkbox">
+            </div>
+            <ul ng-repeat="name in vm.units">
+                <li class="check">
+                    <span>{{name}}</span>
+                    <input type="checkbox">
+                </li>
+            </ul>
+        </div>
     </aside>
 
-    <div class="main-menu-center">
+    <div class="menu-center">
         MainMenu {{vm.name}}
     </div>
 
-    <aside class="main-menu-right">
-        Right
+    <aside>
+        <div class="menu-options">
+            Right
+        </div>
     </aside>
 </div>

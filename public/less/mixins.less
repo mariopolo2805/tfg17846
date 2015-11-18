@@ -16,6 +16,7 @@
     .align-items(@align: stretch)
     .align-self(@align: auto)
     .border-radius(@radius)
+    .text-decoration(@color)
 
 
 -------------------------------------------------------------------*/
@@ -153,9 +154,16 @@
 
 // Border-radius
 .border-radius(@radius) {
-  border-radius: @radius;
   -webkit-border-radius: @radius;
-  -moz-border-radius: @radius;
-  -ms-border-radius: @radius;
-  -o-border-radius: @radius;
+     -moz-border-radius: @radius;
+      -ms-border-radius: @radius;
+       -o-border-radius: @radius;
+          border-radius: @radius;
+}
+
+// Text decoration
+.text-decoration(@color) {
+          text-decoration: underline;
+       text-decoration-color: @color;
+  -moz-text-decoration-color: @color;
 }

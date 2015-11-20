@@ -1,15 +1,19 @@
 define([
     'angular',
     'ui-bootstrap',
+    'commons/services/main',
+    'commons/models/main',
     'landingPage/main',
     'login/main',
     'mainMenu/main'
-], function(angular, directivesDecorators){
+], function(angular) {
     'use strict';
 
     return angular.module('app', [
         'ui.bootstrap',
         'ui.router',
+        'tfg.services',
+        'tfg.models',
         'tfg.landing',
         'tfg.login',
         'tfg.mainMenu'

@@ -1,12 +1,13 @@
 define([
     'angular',
     './controller'
-], function (angular, controller){
+], function(angular, controller) {
     'use strict';
 
     angular
         .module('tfg.login', ['ui.router'])
-        .config(function($stateProvider, $urlRouterProvider){
+        .controller('LoginCtrl', ['UserDataModel', 'UserDataSer', controller.LoginCtrl])
+        .config(function($stateProvider, $urlRouterProvider) {
             $stateProvider
                 .state('wrapper.login', {
                     url: '/login',
@@ -18,6 +19,5 @@ define([
                         }
                     }
                 });
-        })
-        .controller('LoginCtrl', ['$http', controller.LoginCtrl]);
+        });
 });

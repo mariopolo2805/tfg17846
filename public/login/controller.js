@@ -1,23 +1,25 @@
-define([], function(){
+define([], function() {
     'use strict';
 
-    function LoginCtrl($http) {
+    function LoginCtrl(UserDataModel, UserDataSer) {
         var vm = this;
 
-        vm.email = "marioantonio.polo@estudiante.uam.es";
+        // Forms values
+        vm.email = "";
         vm.password = "";
 
         vm.submit = function() {
-            var req = {
-                method: 'POST',
-                url: 'http://localhost:9000/login/' + vm.email
-            }
-
-            $http(req).success(function(data) {
-                if(data.password === vm.password) {
-                    console.log("Password correcta!");
+            UserDataSer.getUserData(vm.email).then(function(user) {
+                vm.user = new UserDataModel.UserData(user);
+                console.log(vm.user);
+                if(vm.user.password !== vm.password) {
+                    vm.msgInvalidLogin = "Email o contraseña incorrectos";
+                } else if(!vm.user.isTeacher) {
+                    vm.msgInvalidLogin = "Acceso solo autorizado a profesores";
                 } else {
-                    console.log("Error en login");
+                    vm.msgInvalidLogin = "";
+                    //crear rootScope
+                    //go() mainMenu
                 }
             });
         }

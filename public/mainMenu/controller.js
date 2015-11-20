@@ -1,4 +1,4 @@
-define([], function(){
+define([], function() {
     'use strict';
 
     function MainMenuCtrl() {
@@ -18,7 +18,7 @@ define([], function(){
             "Tema 3"
         ];
 
-        vm.subject = function(name){
+        vm.subject = function(name) {
             console.log(name);
         };
 

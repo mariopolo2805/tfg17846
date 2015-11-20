@@ -1,4 +1,4 @@
-(function (requirejs){
+(function(requirejs) {
     'use strict';
 
     requirejs.config({
@@ -38,8 +38,8 @@
         'ui-bootstrap',
         'underscore',
         './app'
-    ], function(angular){
-            angular.bootstrap(document, ['app']);
-        }
-    );
+    ], function(angular) {
+        angular.bootstrap(document, ['app']);
+    });
+
 })(requirejs);

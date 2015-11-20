@@ -1,12 +1,13 @@
 define([
     'angular',
     './controller'
-], function (angular, controller){
+], function(angular, controller) {
     'use strict';
 
     angular
         .module('tfg.mainMenu', ['ui.router'])
-        .config(function($stateProvider, $urlRouterProvider){
+        .controller('MainMenuCtrl', [controller.MainMenuCtrl])
+        .config(function($stateProvider, $urlRouterProvider) {
             $stateProvider
                 .state('wrapper.mainMenu', {
                     url: '/mainMenu',
@@ -18,6 +19,5 @@ define([
                         }
                     }
                 });
-        })
-        .controller('MainMenuCtrl', [controller.MainMenuCtrl]);
+        });
 });

@@ -1,11 +1,11 @@
 define([
     'angular'
-], function (angular){
+], function(angular) {
     'use strict';
 
     angular
         .module('tfg.landing', ['ui.router'])
-        .config(function($stateProvider, $urlRouterProvider){
+        .config(function($stateProvider, $urlRouterProvider) {
             $stateProvider
                 .state('wrapper.landingPage', {
                     url: '/landingPage',

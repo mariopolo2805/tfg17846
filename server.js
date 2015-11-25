@@ -1,8 +1,8 @@
 "use strict";
 
-var express         = require('express');
+var express = require('express');
 var lessMiddleware  = require('less-middleware');
-var app             = express();
+var app = express();
 
 /************************
 * Routing configuration *
@@ -41,9 +41,15 @@ var connection = mysql.createConnection({
 });
 
 
-/***************
-* MySQL QUERYS *
-***************/
+/*************************
+* CryptoJS configuration *
+**************************/
+
+var cryptoJS = require("crypto-js");
+
+/******************
+* MySQL Query API *
+*******************/
 
 app.get('/#/login', function(req, res) {
     res.sendfile('login/login.html');
@@ -56,7 +62,10 @@ app.post('/login/:user', function(req, res) {
         if(err) {
             console.log("Problem with MySQL" + err);
         } else {
-            res.send(JSON.stringify(rows[0]));
+            // Encrypt
+            rows[0].password = cryptoJS.SHA256(rows[0].password);
+            var json = JSON.stringify(rows[0]);
+            res.send(json);
         }
     });
 });

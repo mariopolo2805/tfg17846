@@ -10,7 +10,8 @@
             'angular': ['lib/angular/angular'],
             'ui-router': ['lib/angular-ui-router/release/angular-ui-router'],
             'ui-bootstrap': ['lib/angular-bootstrap-npm/dist/angular-bootstrap'],
-            'underscore': ['lib/underscore/underscore-min'],
+            'crypto-js': ['lib/crypto-js/crypto-js'],
+            'underscore': ['lib/underscore/underscore-min']
         },
 
         shim: {
@@ -23,7 +24,7 @@
             'ui-bootstrap': ['angular'],
             'underscore': {
                 exports: '_'
-            },
+            }
         }
     });
 

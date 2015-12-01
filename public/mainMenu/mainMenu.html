@@ -6,16 +6,16 @@
                 <li class="hover" ng-click="vm.subject(name)">{{name}}</li>
             </ul>
         </div>
-        <div class="menu-options">
+        <div class="menu-options" ng-controller="EditableChecksCtrl as vm">
             <span class="menu-options-title">Temas</span>
             <div class="menu-options-selectAll">
                 <span>Seleccionar todos</span>
-                <input type="checkbox">
+                <input type="checkbox" ng-click="vm.checkAll(vm.checkItemsList)" ng-checked="vm.allChecked(vm.checkItemsList)" ng-disabled="vm.checkItemsList.length === 0">
             </div>
-            <ul ng-repeat="name in vm.units">
+            <ul ng-repeat="name in vm.units track by $index">
                 <li class="check">
                     <span>{{name}}</span>
-                    <input type="checkbox">
+                    <input type="checkbox" ng-model="vm.checkItemsList[$index].check" ng-change="vm.changeList(vm.checkItemsList)">
                 </li>
             </ul>
         </div>

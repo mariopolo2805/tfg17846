@@ -13,7 +13,7 @@ define(['crypto-js'], function(criptoJS) {
                 vm.user = new UserDataModel.UserData(user);
                 if(!vm.user.isTeacher) {
                     vm.msgInvalidLogin = "Acceso solo autorizado a profesores";
-                } else if(!isCorrectPassword(vm.password, vm.user.password.words)) {
+                } else if(!isCorrectPassword(vm.password, vm.user.password)) {
                     vm.msgInvalidLogin = "Email o contraseña incorrectos";
                 } else {
                     vm.msgInvalidLogin = "";
@@ -23,13 +23,9 @@ define(['crypto-js'], function(criptoJS) {
             });
         }
 
-        var isCorrectPassword = function(password, words) {
-            var bool = _.every(_.map(criptoJS.SHA256(password).words, function(item, index) {
-                    return (item === words[index]);
-                }, 0), function(res) {
-                return res;
-            }, 0);
-            return bool;
+        var isCorrectPassword = function(password, userEncryptPassword) {
+            var encryptPassword = criptoJS.SHA256(password).toString();
+            return encryptPassword === userEncryptPassword;
         };
 
     }

@@ -58,10 +58,11 @@ body {
 /*--  [Containers]  -----------------------------------------------*/
 main {
     .flex-display();
+    .flex-direction(column);
     .justify-content(center);
     .align-items(center);
     width: 100%;
-    height: 100%;
+    .flex-grow(1);
 }
 
 section, ui-view {
@@ -70,7 +71,7 @@ section, ui-view {
     .justify-content(center);
     .align-items(center);
     width: 980px;
-    height: 100%;
+    .flex-grow(1);
 }
 
 header {

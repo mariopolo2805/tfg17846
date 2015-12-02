@@ -3,9 +3,9 @@ define([
     'ui-bootstrap',
     'commons/services/main',
     'commons/models/main',
-    'landingPage/main',
-    'login/main',
-    'mainMenu/main'
+    'modules/landingPage/main',
+    'modules/login/main',
+    'modules/mainMenu/main'
 ], function(angular) {
     'use strict';
 

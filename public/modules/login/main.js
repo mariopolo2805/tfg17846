@@ -13,7 +13,7 @@ define([
                     url: '/login',
                     views: {
                         '': {
-                            templateUrl: '/login/login.html',
+                            templateUrl: 'modules/login/login.html',
                             controller: 'LoginCtrl',
                             controllerAs: 'vm'
                         }

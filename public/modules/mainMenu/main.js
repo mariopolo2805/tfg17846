@@ -14,7 +14,7 @@ define([
                     url: '/mainMenu',
                     views: {
                         '': {
-                            templateUrl: '/mainMenu/mainMenu.html',
+                            templateUrl: 'modules/mainMenu/mainMenu.html',
                             controller: 'MainMenuCtrl',
                             controllerAs: 'vm'
                         }

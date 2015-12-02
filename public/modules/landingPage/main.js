@@ -11,7 +11,7 @@ define([
                     url: '/landingPage',
                     views: {
                         '': {
-                            templateUrl: '/landingPage/landingPage.html'
+                            templateUrl: '/modules/landingPage/landingPage.html'
                         }
                     }
                 });

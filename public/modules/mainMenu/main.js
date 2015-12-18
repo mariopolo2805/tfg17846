@@ -6,9 +6,9 @@ define([
 
     angular
         .module('tfg.mainMenu', ['ui.router'])
-        .controller('MainMenuCtrl', [controller.MainMenuCtrl])
+        .controller('MainMenuCtrl', ['$state', 'UserDataSer', controller.MainMenuCtrl])
         .controller('EditableChecksCtrl', [controller.EditableChecksCtrl])
-        .config(function($stateProvider, $urlRouterProvider) {
+        .config(function($stateProvider) {
             $stateProvider
                 .state('wrapper.mainMenu', {
                     url: '/mainMenu',

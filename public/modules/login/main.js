@@ -5,9 +5,15 @@ define([
     'use strict';
 
     angular
-        .module('tfg.login', ['ui.router'])
-        .controller('LoginCtrl', ['UserDataModel', 'UserDataSer', controller.LoginCtrl])
-        .config(function($stateProvider, $urlRouterProvider) {
+        .module('tfg.login', ['tfg.mainMenu', 'ngCookies', 'ui.router'])
+        .controller('LoginCtrl', [
+            '$cookies',
+            '$state',
+            'UserDataModel',
+            'UserDataSer',
+            controller.LoginCtrl
+        ])
+        .config(function($stateProvider) {
             $stateProvider
                 .state('wrapper.login', {
                     url: '/login',

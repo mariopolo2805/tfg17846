@@ -1,8 +1,11 @@
 define([], function() {
     'use strict';
 
-    function MainMenuCtrl() {
+    function MainMenuCtrl($state, UserDataSer) {
         var vm = this;
+
+        var user = UserDataSer.getUserCookie();
+        console.log(user);
 
         vm.name = "mainMenu";
         vm.subjects = [
@@ -15,7 +18,6 @@ define([], function() {
         vm.subject = function(name) {
             console.log(name);
         };
-
     }
 
     function EditableChecksCtrl() {

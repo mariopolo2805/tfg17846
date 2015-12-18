@@ -1,10 +1,9 @@
 define(['crypto-js'], function(criptoJS) {
     'use strict';
 
-    function LoginCtrl(UserDataModel, UserDataSer) {
+    function LoginCtrl($cookies, $state, UserDataModel, UserDataSer) {
         var vm = this;
 
-        // Forms values
         vm.email = "";
         vm.password = "";
 
@@ -17,8 +16,11 @@ define(['crypto-js'], function(criptoJS) {
                     vm.msgInvalidLogin = "Email o contraseña incorrectos";
                 } else {
                     vm.msgInvalidLogin = "";
-                    //crear rootScope
-                    //go() mainMenu
+                    var expired = new Date();
+                    //expired.setHours(expired.getHours() + 1);
+                    expired.setMinutes(expired.getMinutes() + 1);
+                    $cookies.putObject('user', vm.user, { expires : expired });
+                    $state.go('wrapper.mainMenu');
                 }
             });
         }
@@ -34,3 +36,13 @@ define(['crypto-js'], function(criptoJS) {
         LoginCtrl: LoginCtrl
     }
 });
+
+
+
+// $cookies.put('user', user.username);
+// var username = $cookies.get('user');
+
+// var today = new Date(); //You can set the expired time with the third params
+// var expired = new Date(today);
+// expired.setDate(today.getDate() + 1); //Set expired date to tomorrow
+// $cookies.put('user', user.username, {expires : expired });

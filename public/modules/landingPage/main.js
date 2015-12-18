@@ -5,7 +5,7 @@ define([
 
     angular
         .module('tfg.landing', ['ui.router'])
-        .config(function($stateProvider, $urlRouterProvider) {
+        .config(function($stateProvider) {
             $stateProvider
                 .state('wrapper.landingPage', {
                     url: '/landingPage',

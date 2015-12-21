@@ -17,8 +17,7 @@ define(['crypto-js'], function(criptoJS) {
                 } else {
                     vm.msgInvalidLogin = "";
                     var expired = new Date();
-                    //expired.setHours(expired.getHours() + 1);
-                    expired.setMinutes(expired.getMinutes() + 1);
+                    expired.setMinutes(expired.getMinutes() + 30);
                     $cookies.putObject('user', vm.user, { expires : expired });
                     $state.go('wrapper.mainMenu');
                 }

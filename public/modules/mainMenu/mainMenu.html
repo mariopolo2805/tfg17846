@@ -2,8 +2,8 @@
     <aside>
         <div class="menu-options">
             <span class="menu-options-title">Asignaturas</span>
-            <ul ng-repeat="name in vm.subjects">
-                <li class="hover" ng-click="vm.subject(name)">{{name}}</li>
+            <ul ng-repeat="subject in vm.subjects">
+                <li class="hover" ng-click="vm.subjectSelected(subject.id)">{{subject.code}}</li>
             </ul>
         </div>
         <div class="menu-options" ng-controller="EditableChecksCtrl as vm">

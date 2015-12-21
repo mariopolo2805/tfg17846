@@ -6,7 +6,12 @@ define([
 
     angular
         .module('tfg.mainMenu', ['ui.router'])
-        .controller('MainMenuCtrl', ['$state', 'UserDataSer', controller.MainMenuCtrl])
+        .controller('MainMenuCtrl', [
+            '$state',
+            'UserDataSer',
+            'SubjectDataSer',
+            'SubjectDataModel',
+            controller.MainMenuCtrl])
         .controller('EditableChecksCtrl', [controller.EditableChecksCtrl])
         .config(function($stateProvider) {
             $stateProvider

@@ -1,22 +1,26 @@
 define([], function() {
     'use strict';
 
-    function MainMenuCtrl($state, UserDataSer) {
+    function MainMenuCtrl($state, UserDataSer, SubjectDataSer, SubjectDataModel) {
         var vm = this;
-
-        var user = UserDataSer.getUserCookie();
-        console.log(user);
-
+        vm.user = null;
+        vm.subjects = [];
         vm.name = "mainMenu";
-        vm.subjects = [
-            "SI1 - G301",
-            "SI1 - G302",
-            "PSI - G361",
-            "PSI - G362"
-        ];
 
-        vm.subject = function(name) {
-            console.log(name);
+        /* User */
+
+        vm.user = UserDataSer.getUserCookie();
+        console.log("Login with ", vm.user);
+
+        /* Subjects */
+        SubjectDataSer.getSubjectsData().then(function(subjects) {
+            vm.subjects = _.map(subjects, function(subject) {
+                return new SubjectDataModel.SubjectData(subject);
+            });
+        });
+
+        vm.subjectSelected = function(id) {
+            console.log(id);
         };
     }
 
@@ -31,7 +35,6 @@ define([], function() {
             "Tema 3"
         ];
 
-        // This list is used to get information about checked items
         vm.checkItemsList = toCheckList(vm.units);
         function toCheckList(list) {
             return _.map(list, function(obj) {
@@ -65,7 +68,6 @@ define([], function() {
             if(list.length === 0) {
                 return;
             }
-
             if(vm.allChecked(list)) {
                 checkAll = false;
             }

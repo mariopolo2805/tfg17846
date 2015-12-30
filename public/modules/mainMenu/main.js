@@ -11,6 +11,8 @@ define([
             'UserDataSer',
             'SubjectDataSer',
             'SubjectDataModel',
+            'GroupDataSer',
+            'GroupDataModel',
             controller.MainMenuCtrl])
         .controller('EditableChecksCtrl', [controller.EditableChecksCtrl])
         .config(function($stateProvider) {

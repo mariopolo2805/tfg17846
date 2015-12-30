@@ -49,7 +49,7 @@ app.get('/#/login', function(req, res) {
 
 app.post('/login/:user', function(req, res) {
     var user = req.params.user;
-    var query = "SELECT * FROM User WHERE email='" + user + "'";
+    var query = "SELECT * FROM tfg.User WHERE email='" + user + "'";
     connection.query(query, function(err, rows) {
         if(err) {
             console.log("Problem with MySQL" + err);
@@ -63,7 +63,7 @@ app.post('/login/:user', function(req, res) {
 /* Subject Queries */
 
 app.post('/subjects', function(req, res) {
-    var query = "SELECT * FROM Subject";
+    var query = "SELECT * FROM tfg.Subject";
     connection.query(query, function(err, rows) {
         if(err) {
             console.log("Problem with MySQL" + err);
@@ -76,12 +76,52 @@ app.post('/subjects', function(req, res) {
 
 app.post('/subject/:id', function(req, res) {
     var id = req.params.id;
-    var query = "SELECT * FROM Subject WHERE idSubject='" + id + "'";
+    var query = "SELECT * FROM tfg.Subject WHERE idSubject='" + id + "'";
     connection.query(query, function(err, rows) {
         if(err) {
             console.log("Problem with MySQL" + err);
         } else {
             var json = JSON.stringify(rows[0]);
+            res.send(json);
+        }
+    });
+});
+
+/* Group Queries */
+
+app.post('/groups', function(req, res) {
+    var query = "SELECT * FROM tfg.Group";
+    connection.query(query, function(err, rows) {
+        if(err) {
+            console.log("Problem with MySQL" + err);
+        } else {
+            var json = JSON.stringify(rows);
+            res.send(rows);
+        }
+    });
+});
+
+app.post('/group/:id', function(req, res) {
+    var id = req.params.id;
+    var query = "SELECT * FROM tfg.Group WHERE idGroup='" + id + "'";
+    connection.query(query, function(err, rows) {
+        if(err) {
+            console.log("Problem with MySQL" + err);
+        } else {
+            var json = JSON.stringify(rows[0]);
+            res.send(json);
+        }
+    });
+});
+
+app.post('/groupsOfTeacher/:id', function(req, res) {
+    var id = req.params.id;
+    var query = "SELECT * FROM tfg.Group WHERE idTeacher='" + id + "'";
+    connection.query(query, function(err, rows) {
+        if(err) {
+            console.log("Problem with MySQL" + err);
+        } else {
+            var json = JSON.stringify(rows);
             res.send(json);
         }
     });

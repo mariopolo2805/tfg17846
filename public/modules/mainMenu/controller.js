@@ -1,14 +1,21 @@
 define([], function() {
     'use strict';
 
-    function MainMenuCtrl($state, UserDataSer, SubjectDataSer, SubjectDataModel) {
+    function MainMenuCtrl(
+        $state,
+        UserDataSer,
+        SubjectDataSer,
+        SubjectDataModel,
+        GroupDataSer,
+        GroupDataModel) {
+
         var vm = this;
         vm.user = null;
         vm.subjects = [];
+        vm.groups = [];
         vm.name = "mainMenu";
 
         /* User */
-
         vm.user = UserDataSer.getUserCookie();
         console.log("Login with ", vm.user);
 
@@ -18,10 +25,17 @@ define([], function() {
                 return new SubjectDataModel.SubjectData(subject);
             });
         });
-
         vm.subjectSelected = function(id) {
             console.log(id);
         };
+
+        /* Groups */
+        GroupDataSer.getGroupsOfTeacherData(vm.user.id).then(function(groups) {
+            vm.groups = _.map(groups, function(group) {
+                return new GroupDataModel.GroupData(group);
+            });
+            console.log(vm.groups);
+        });
     }
 
     function EditableChecksCtrl() {

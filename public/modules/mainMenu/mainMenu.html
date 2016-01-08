@@ -2,8 +2,8 @@
     <aside>
         <div class="menu-options">
             <span class="menu-options-title">Grupos</span>
-            <ul ng-repeat="subject in vm.subjects">
-                <li class="hover" ng-click="vm.subjectSelected(subject.id)">{{subject.code}}</li>
+            <ul ng-repeat="group in vm.groups">
+                <li class="hover" ng-click="vm.groupSelected(group.id)">{{group.subject.code}} - {{group.group}}</li>
             </ul>
         </div>
         <div class="menu-options" ng-controller="EditableChecksCtrl as vm">

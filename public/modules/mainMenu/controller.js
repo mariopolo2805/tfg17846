@@ -4,14 +4,11 @@ define([], function() {
     function MainMenuCtrl(
         $state,
         UserDataSer,
-        SubjectDataSer,
-        SubjectDataModel,
         GroupDataSer,
         GroupDataModel) {
 
         var vm = this;
         vm.user = null;
-        vm.subjects = [];
         vm.groups = [];
         vm.name = "mainMenu";
 
@@ -19,23 +16,17 @@ define([], function() {
         vm.user = UserDataSer.getUserCookie();
         console.log("Login with ", vm.user);
 
-        /* Subjects */
-        SubjectDataSer.getSubjectsData().then(function(subjects) {
-            vm.subjects = _.map(subjects, function(subject) {
-                return new SubjectDataModel.SubjectData(subject);
-            });
-        });
-        vm.subjectSelected = function(id) {
-            console.log(id);
-        };
-
-        /* Groups */
-        GroupDataSer.getGroupsOfTeacherData(vm.user.id).then(function(groups) {
-            vm.groups = _.map(groups, function(group) {
-                return new GroupDataModel.GroupData(group);
+        /* Group with subject of teacher */
+        GroupDataSer.getGroupsWithSubjectOfTeacherData(vm.user.id).then(function(subjects) {
+            vm.groups = _.map(subjects, function(groupWithSubject) {
+                return new GroupDataModel.GroupData(groupWithSubject);
             });
             console.log(vm.groups);
         });
+
+        vm.groupSelected = function(id) {
+            console.log(id);
+        }
     }
 
     function EditableChecksCtrl() {

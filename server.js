@@ -126,3 +126,16 @@ app.post('/groupsOfTeacher/:id', function(req, res) {
         }
     });
 });
+
+app.post('/groupsWithSubjectOfTeacher/:id', function(req, res) {
+    var id = req.params.id;
+    var query = "SELECT * FROM tfg.Group NATURAL JOIN tfg.Subject WHERE idTeacher='" + id + "'";
+    connection.query(query, function(err, rows) {
+        if(err) {
+            console.log("Problem with MySQL" + err);
+        } else {
+            var json = JSON.stringify(rows);
+            res.send(json);
+        }
+    });
+});

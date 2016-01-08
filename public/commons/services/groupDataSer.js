@@ -29,6 +29,15 @@ define(['angular'], function(angular) {
                 return result.data;
             });
         };
+
+        this.getGroupsWithSubjectOfTeacherData = function(id) {
+            return $http({
+                url: 'http://localhost:9000/groupsWithSubjectOfTeacher/' + id,
+                method: 'POST'
+            }).then(function(result) {
+                return result.data;
+            });
+        };
     }
 
     angular

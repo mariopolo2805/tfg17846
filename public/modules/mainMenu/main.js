@@ -9,8 +9,6 @@ define([
         .controller('MainMenuCtrl', [
             '$state',
             'UserDataSer',
-            'SubjectDataSer',
-            'SubjectDataModel',
             'GroupDataSer',
             'GroupDataModel',
             controller.MainMenuCtrl])

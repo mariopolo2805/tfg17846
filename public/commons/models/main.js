@@ -2,13 +2,15 @@ define([
     'angular',
     './userDataModel',
     './subjectDataModel',
-    './groupDataModel'
+    './groupDataModel',
+    './sectionDataModel'
 ], function(angular) {
     'use strict';
 
     return angular.module('tfg.models', [
         'tfg.models.userDataModel',
         'tfg.models.subjectDataModel',
-        'tfg.models.groupDataModel'
+        'tfg.models.groupDataModel',
+        'tfg.models.sectionDataModel'
     ]);
 });

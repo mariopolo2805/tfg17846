@@ -5,12 +5,17 @@ define([], function() {
         $state,
         UserDataSer,
         GroupDataSer,
-        GroupDataModel) {
+        GroupDataModel,
+        SectionDataSer,
+        SectionDataModel) {
 
         var vm = this;
         vm.user = null;
         vm.groups = [];
-        vm.name = "mainMenu";
+        vm.groupActive = 0;
+        vm.sections = [];
+        vm.numChecked = 0;
+        vm.isAnyChecked = false;
 
         /* User */
         vm.user = UserDataSer.getUserCookie();
@@ -21,77 +26,66 @@ define([], function() {
             vm.groups = _.map(subjects, function(groupWithSubject) {
                 return new GroupDataModel.GroupData(groupWithSubject);
             });
-            console.log(vm.groups);
+            getSections();
         });
 
-        vm.groupSelected = function(id) {
-            console.log(id);
+        vm.groupSelected = function(index) {
+            vm.groupActive = index;
+            getSections();
         }
-    }
 
-    function EditableChecksCtrl() {
-        var vm = this;
-        vm.numChecked = 0;
-        vm.isAnyChecked = false;
-
-        vm.units = [
-            "Tema 1",
-            "Tema 2",
-            "Tema 3"
-        ];
-
-        vm.checkItemsList = toCheckList(vm.units);
-        function toCheckList(list) {
-            return _.map(list, function(obj) {
-                var item = {
-                    id: obj.id,
-                    check: false
-                };
-                return item;
+        /* Section */
+        function getSections() {
+            SectionDataSer.getSectionsOfGroupData(vm.groups[vm.groupActive].id).then(function(sections) {
+                vm.sections = _.map(sections, function(section) {
+                    var s = new SectionDataModel.SectionData(section);
+                    s.check = false;
+                    return s;
+                });
             });
         }
 
-        function getCheckList(list) {
-            return _.filter(list, function(item) {
+        function getCheckList() {
+            return _.filter(vm.sections, function(item) {
                 return item.check;
             });
         }
 
-        vm.allChecked = function(list) {
-            if(list.length === 0) {
+        vm.allChecked = function() {
+            if(vm.sections.length === 0) {
                 return;
             }
-            vm.changeList(list);
-            return _.reduce(list, function(check, item) {
+            vm.changeList(vm.sections);
+            return _.reduce(vm.sections, function(check, item) {
                 return item.check && check;
             }, true);
         };
 
-        vm.checkAll = function(list) {
+        vm.checkAll = function() {
             var checkAll = true;
 
-            if(list.length === 0) {
+            if(vm.sections.length === 0) {
                 return;
             }
-            if(vm.allChecked(list)) {
+            if(vm.allChecked(vm.sections)) {
                 checkAll = false;
             }
 
-            _.each(list, function(item) {
+            _.each(vm.sections, function(item) {
                 item.check = checkAll;
             });
             vm.isAnyChecked = checkAll;
         };
 
-        vm.uncheckAll = function(list) {
-            _.each(list, function(item) {
+        vm.uncheckAll = function() {
+            _.each(vm.sections, function(item) {
                 item.check = false;
             });
         };
 
-        vm.changeList = function(list) {
+        vm.changeList = function() {
             vm.numChecked = 0;
-            _.each(list, function(item, index) {
+            _.each(vm.sections, function(item, index) {
                 if(item.check) {
                     vm.numChecked++;
                     vm.isAnyChecked = true;
@@ -104,7 +98,6 @@ define([], function() {
     }
 
     return {
-        MainMenuCtrl: MainMenuCtrl,
-        EditableChecksCtrl: EditableChecksCtrl
+        MainMenuCtrl: MainMenuCtrl
     }
 });

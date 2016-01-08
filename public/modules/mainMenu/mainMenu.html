@@ -2,27 +2,27 @@
     <aside>
         <div class="menu-options">
             <span class="menu-options-title">Grupos</span>
-            <ul ng-repeat="group in vm.groups">
-                <li class="hover" ng-click="vm.groupSelected(group.id)">{{group.subject.code}} - {{group.group}}</li>
+            <ul ng-repeat="group in vm.groups track by $index">
+                <li class="hover" ng-class="{active: vm.groupActive === $index}" ng-click="vm.groupSelected($index)">{{group.subject.code}} - {{group.group}}</li>
             </ul>
         </div>
-        <div class="menu-options" ng-controller="EditableChecksCtrl as vm">
+        <div class="menu-options">
             <span class="menu-options-title">Temas</span>
             <div class="menu-options-selectAll">
                 <span>Seleccionar todos</span>
-                <input type="checkbox" ng-click="vm.checkAll(vm.checkItemsList)" ng-checked="vm.allChecked(vm.checkItemsList)" ng-disabled="vm.checkItemsList.length === 0">
+                <input type="checkbox" ng-click="vm.checkAll()" ng-checked="vm.allChecked()" ng-disabled="vm.sections.length === 0">
             </div>
-            <ul ng-repeat="name in vm.units track by $index">
+            <ul ng-repeat="section in vm.sections track by $index">
                 <li class="check">
-                    <span>{{name}}</span>
-                    <input type="checkbox" ng-model="vm.checkItemsList[$index].check" ng-change="vm.changeList(vm.checkItemsList)">
+                    <span>{{section.name}}</span>
+                    <input type="checkbox" ng-model="vm.sections[$index].check" ng-change="vm.changeList()">
                 </li>
             </ul>
         </div>
     </aside>
 
     <div class="menu-center">
-        MainMenu {{vm.name}}
+        MainMenu - MainMenu
     </div>
 
     <aside>

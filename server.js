@@ -52,7 +52,7 @@ app.post('/login/:user', function(req, res) {
     var query = "SELECT * FROM tfg.User WHERE email='" + user + "'";
     connection.query(query, function(err, rows) {
         if(err) {
-            console.log("Problem with MySQL" + err);
+            console.error("Problem with MySQL" + err);
         } else {
             var json = JSON.stringify(rows[0]);
             res.send(json);
@@ -66,10 +66,10 @@ app.post('/subjects', function(req, res) {
     var query = "SELECT * FROM tfg.Subject";
     connection.query(query, function(err, rows) {
         if(err) {
-            console.log("Problem with MySQL" + err);
+            console.error("Problem with MySQL" + err);
         } else {
             var json = JSON.stringify(rows);
-            res.send(rows);
+            res.send(json);
         }
     });
 });
@@ -79,7 +79,7 @@ app.post('/subject/:id', function(req, res) {
     var query = "SELECT * FROM tfg.Subject WHERE idSubject='" + id + "'";
     connection.query(query, function(err, rows) {
         if(err) {
-            console.log("Problem with MySQL" + err);
+            console.error("Problem with MySQL" + err);
         } else {
             var json = JSON.stringify(rows[0]);
             res.send(json);
@@ -93,10 +93,10 @@ app.post('/groups', function(req, res) {
     var query = "SELECT * FROM tfg.Group";
     connection.query(query, function(err, rows) {
         if(err) {
-            console.log("Problem with MySQL" + err);
+            console.error("Problem with MySQL" + err);
         } else {
             var json = JSON.stringify(rows);
-            res.send(rows);
+            res.send(json);
         }
     });
 });
@@ -106,7 +106,7 @@ app.post('/group/:id', function(req, res) {
     var query = "SELECT * FROM tfg.Group WHERE idGroup='" + id + "'";
     connection.query(query, function(err, rows) {
         if(err) {
-            console.log("Problem with MySQL" + err);
+            console.error("Problem with MySQL" + err);
         } else {
             var json = JSON.stringify(rows[0]);
             res.send(json);
@@ -119,7 +119,7 @@ app.post('/groupsOfTeacher/:id', function(req, res) {
     var query = "SELECT * FROM tfg.Group WHERE idTeacher='" + id + "'";
     connection.query(query, function(err, rows) {
         if(err) {
-            console.log("Problem with MySQL" + err);
+            console.error("Problem with MySQL" + err);
         } else {
             var json = JSON.stringify(rows);
             res.send(json);
@@ -132,7 +132,47 @@ app.post('/groupsWithSubjectOfTeacher/:id', function(req, res) {
     var query = "SELECT * FROM tfg.Group NATURAL JOIN tfg.Subject WHERE idTeacher='" + id + "'";
     connection.query(query, function(err, rows) {
         if(err) {
-            console.log("Problem with MySQL" + err);
+            console.error("Problem with MySQL" + err);
+        } else {
+            var json = JSON.stringify(rows);
+            res.send(json);
+        }
+    });
+});
+
+/* Section Queries */
+
+app.post('/sections', function(req, res) {
+    var query = "SELECT * FROM tfg.Section";
+    connection.query(query, function(err, rows) {
+        if(err) {
+            console.error("Problem with MySQL" + err);
+        } else {
+            var json = JSON.stringify(rows);
+            res.send(json);
+        }
+    });
+});
+
+app.post('/section/:id', function(req, res) {
+    var id = req.params.id;
+    var query = "SELECT * FROM tfg.Section WHERE idSection='" + id + "'";
+    connection.query(query, function(err, rows) {
+        if(err) {
+            console.error("Problem with MySQL" + err);
+        } else {
+            var json = JSON.stringify(rows[0]);
+            res.send(json);
+        }
+    });
+});
+
+app.post('/sectionsOfGroup/:id', function(req, res) {
+    var id = req.params.id;
+    var query = "SELECT * FROM tfg.Section WHERE idGroup='" + id + "'";
+    connection.query(query, function(err, rows) {
+        if(err) {
+            console.error("Problem with MySQL" + err);
         } else {
             var json = JSON.stringify(rows);
             res.send(json);

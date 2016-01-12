@@ -30,13 +30,13 @@ define([
                     'wrapper': {
                         templateUrl: 'wrapper/wrapper.html'
                     },
-                    'wrapper-top@wrapper' : {
+                    'wrapper-top@wrapper': {
                         templateUrl : 'wrapper/wrapper-top.html',
                     },
-                    'wrapper-content@wrapper' : {
+                    'wrapper-content@wrapper': {
                         template: '<ui-view></ui-view>'
                     },
-                    'wrapper-foot@wrapper' : {
+                    'wrapper-foot@wrapper': {
                         templateUrl : 'wrapper/wrapper-foot.html',
                     }
                 }

@@ -22,7 +22,14 @@
     </aside>
 
     <div class="menu-center">
-        MainMenu - MainMenu
+        <span class="menu-center-title">{{vm.groups[vm.groupActive].subject.name}} - Grupo {{vm.groups[vm.groupActive].group | limitTo : 5 : 1}}</span>
+        <ul class="menu-center-tabset">
+            <li class="active"><a href="">Estadísticas por Pregunta</a></li>
+            <li><a href="">Estadísticas por Alumno</a></li>
+            <li><a href="">Nueva Pregunta</a></li>
+            <li><a href="">Editar Pregunta</a></li>
+        </ul>
+        <div ui-view="menu"></div>
     </div>
 
     <aside>

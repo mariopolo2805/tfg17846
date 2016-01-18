@@ -16,10 +16,12 @@ define([], function() {
         vm.sections = [];
         vm.numChecked = 0;
         vm.isAnyChecked = false;
+        vm.tabActive = 0;
 
         /* User */
         vm.user = UserDataSer.getUserCookie();
         console.log("Login with ", vm.user);
+        /* User */
 
         /* Group with subject of teacher */
         GroupDataSer.getGroupsWithSubjectOfTeacherData(vm.user.id).then(function(subjects) {
@@ -33,6 +35,7 @@ define([], function() {
             vm.groupActive = index;
             getSections();
         }
+        /* Group with subject of teacher */
 
         /* Section */
         function getSections() {
@@ -95,6 +98,19 @@ define([], function() {
                 vm.isAnyChecked = false;
             }
         };
+        /* Section */
+
+        /* Questions stats */
+        /* Questions stats */
+
+        /* Student stats */
+        /* Student stats */
+
+        /* New question */
+        /* New question */
+
+        /* Edit question */
+        /* Edit question */
     }
 
     return {

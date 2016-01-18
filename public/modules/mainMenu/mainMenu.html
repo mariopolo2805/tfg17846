@@ -3,7 +3,7 @@
         <div class="menu-options">
             <span class="menu-options-title">Grupos</span>
             <ul ng-repeat="group in vm.groups track by $index">
-                <li class="hover" ng-class="{active: vm.groupActive === $index}" ng-click="vm.groupSelected($index)">{{group.subject.code}} - {{group.group}}</li>
+                <li class="group" ng-class="{active: vm.groupActive === $index}" ng-click="vm.groupSelected($index)">{{group.subject.code}} - {{group.group}}</li>
             </ul>
         </div>
         <div class="menu-options">
@@ -24,12 +24,12 @@
     <div class="menu-center">
         <span class="menu-center-title">{{vm.groups[vm.groupActive].subject.name}} - Grupo {{vm.groups[vm.groupActive].group | limitTo : 5 : 1}}</span>
         <ul class="menu-center-tabset">
-            <li class="active"><a href="">Estadísticas por Pregunta</a></li>
-            <li><a href="">Estadísticas por Alumno</a></li>
-            <li><a href="">Nueva Pregunta</a></li>
-            <li><a href="">Editar Pregunta</a></li>
+            <li ng-class="{active: vm.tabActive === 0}" ng-click="vm.tabActive = 0"><a ui-sref=".questionStats">Estadísticas por Pregunta</a></li>
+            <li ng-class="{active: vm.tabActive === 1}" ng-click="vm.tabActive = 1"><a ui-sref=".studentStats">Estadísticas por Estudiante</a></li>
+            <li ng-class="{active: vm.tabActive === 2}" ng-click="vm.tabActive = 2"><a ui-sref=".newQuestion">Nueva Pregunta</a></li>
+            <li ng-class="{active: vm.tabActive === 3}" ng-click="vm.tabActive = 3"><a ui-sref=".editQuestion">Editar Pregunta</a></li>
         </ul>
-        <div ui-view="menu"></div>
+        <div ui-view=""></div>
     </div>
 
     <aside>

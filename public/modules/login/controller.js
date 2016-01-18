@@ -19,7 +19,7 @@ define(['crypto-js'], function(criptoJS) {
                     var expired = new Date();
                     expired.setMinutes(expired.getMinutes() + 60);
                     $cookies.putObject('user', vm.user, { expires : expired });
-                    $state.go('wrapper.mainMenu');
+                    $state.go('wrapper.mainMenu.questionStats');
                 }
             });
         }

@@ -10,7 +10,7 @@ define(['angular'], function(angular) {
                 this.surname = json.surname;
                 this.email = json.email;
                 this.password = json.password;
-                this.isTeacher = (json.email.contains('@uam')) ? true : false;
+                this.isTeacher = (json.email.includes('@uam')) ? true : false;
             } else {
                 this.id = null;
                 this.name = null;

@@ -6,5 +6,18 @@
 -------------------------------------------------------------------*/
 
 .question-stats-layout {
-    background-color: green;
+    .flex-display();
+    .flex-direction(column);
+
+    .question-stats-select {
+        .flex-display();
+        .flex-direction(row);
+        .justify-content(space-between);
+        .align-items(center);
+
+        padding: 25px 20px;
+        select {
+            width: 480px;
+        }
+    }
 }

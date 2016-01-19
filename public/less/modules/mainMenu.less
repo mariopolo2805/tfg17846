@@ -89,7 +89,12 @@
             border-bottom: 2px solid @black;
 
             li {
-                padding: 2px 15px;
+                .flex-display();
+                .flex-direction(row);
+                .flex-grow(1);
+                .justify-content(center);
+                .align-items(center);
+                height: 21px;
                 a {
                     text-decoration: none;
                     .typ14-400-black;

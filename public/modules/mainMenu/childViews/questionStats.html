@@ -1,4 +1,14 @@
 <div class="question-stats-layout">
-    <h2>Estadísticas por Preguntas</h2>
-    {{vm.tabActive}}
+    <div class="question-stats-select">
+        <span class="question-stats-select-title">Seleccione Pregunta:</span>
+        <select ng-options="item as item.text for item in vm.questionsSelect track by item.id" ng-model="vm.questionSelected"></select>
+    </div>
+
+    <div class="question-stats-detail">
+        {{vm.questionSelected}}
+    </div>
+
+    <div class="question-stats-graph">
+
+    </div>
 </div>

@@ -179,3 +179,43 @@ app.post('/sectionsOfGroup/:id', function(req, res) {
         }
     });
 });
+
+/* Question Queries */
+
+app.post('/questions', function(req, res) {
+    var query = "SELECT * FROM tfg.Question";
+    connection.query(query, function(err, rows) {
+        if(err) {
+            console.error("Problem with MySQL" + err);
+        } else {
+            var json = JSON.stringify(rows);
+            res.send(json);
+        }
+    });
+});
+
+app.post('/question/:id', function(req, res) {
+    var id = req.params.id;
+    var query = "SELECT * FROM tfg.Question WHERE idQuestion='" + id + "'";
+    connection.query(query, function(err, rows) {
+        if(err) {
+            console.error("Problem with MySQL" + err);
+        } else {
+            var json = JSON.stringify(rows[0]);
+            res.send(json);
+        }
+    });
+});
+
+app.post('/questionsOfSection/:id', function(req, res) {
+    var id = req.params.id;
+    var query = "SELECT * FROM tfg.Question WHERE idSection='" + id + "'";
+    connection.query(query, function(err, rows) {
+        if(err) {
+            console.error("Problem with MySQL" + err);
+        } else {
+            var json = JSON.stringify(rows);
+            res.send(json);
+        }
+    });
+});

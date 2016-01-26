@@ -13,6 +13,8 @@ define([
             'GroupDataModel',
             'SectionDataSer',
             'SectionDataModel',
+            'QuestionDataSer',
+            'QuestionDataModel',
             controller.MainMenuCtrl])
         .controller('EditableChecksCtrl', [controller.EditableChecksCtrl])
         .config(function($stateProvider) {

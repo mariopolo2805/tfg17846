@@ -7,7 +7,9 @@ define([], function() {
         GroupDataSer,
         GroupDataModel,
         SectionDataSer,
-        SectionDataModel) {
+        SectionDataModel,
+        QuestionDataSer,
+        QuestionDataModel) {
 
         var vm = this;
         vm.user = null;
@@ -101,40 +103,13 @@ define([], function() {
         /* Section */
 
         /* Questions stats */
-        vm.questionsSelect = [
-            {
-                id: 1,
-                idSection: 2,
-                text: "1 - ¿Esto es una pregunta de prueba?",
-                level: 1,
-                idOptionA: 1,
-                idOptionA: 2,
-                idOptionA: 3,
-                idOptionA: 4
-            },
-            {
-                id: 2,
-                idSection: 2,
-                text: "2 - ¿Esto es otra pregunta de prueba?",
-                level: 1,
-                idOptionA: 121,
-                idOptionA: 12,
-                idOptionA: 13,
-                idOptionA: 14
-            },
-            {
-                id: 3,
-                idSection: 2,
-                text: "3 - ¿Esto es la última pregunta de prueba?",
-                level: 1,
-                idOptionA: 21,
-                idOptionA: 22,
-                idOptionA: 23,
-                idOptionA: 24
-            }
-        ];
-
-        vm.questionSelected = vm.questionsSelect[vm.questionsSelect.length - 1];
+        QuestionDataSer.getQuestionsOfSectionData(1).then(function(questions) {
+            vm.questions = _.map(questions, function(question) {
+                return new QuestionDataModel.QuestionData(question);
+            });
+            vm.questionSelected = vm.questions[vm.questions.length - 1];
+            console.log(vm.questions);
+        });
         /* Questions stats */
 
         /* Student stats */

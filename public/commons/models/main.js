@@ -3,7 +3,8 @@ define([
     './userDataModel',
     './subjectDataModel',
     './groupDataModel',
-    './sectionDataModel'
+    './sectionDataModel',
+    './questionDataModel'
 ], function(angular) {
     'use strict';
 
@@ -11,6 +12,7 @@ define([
         'tfg.models.userDataModel',
         'tfg.models.subjectDataModel',
         'tfg.models.groupDataModel',
-        'tfg.models.sectionDataModel'
+        'tfg.models.sectionDataModel',
+        'tfg.models.questionDataModel'
     ]);
 });

@@ -2,8 +2,8 @@
     <aside>
         <div class="menu-options">
             <span class="menu-options-title">Grupos</span>
-            <ul ng-repeat="group in vm.groups track by $index">
-                <li class="group" ng-class="{active: vm.groupActive === $index}" ng-click="vm.groupSelected($index)">{{group.subject.code}} - {{group.group}}</li>
+            <ul>
+                <li class="group" ng-repeat="group in vm.groups track by $index" ng-class="{active: vm.groupActive === $index}" ng-click="vm.groupSelected($index)">{{group.subject.code}} - {{group.group}}</li>
             </ul>
         </div>
         <div class="menu-options">
@@ -12,10 +12,10 @@
                 <span>Seleccionar todos</span>
                 <input type="checkbox" ng-click="vm.checkAll()" ng-checked="vm.allChecked()" ng-disabled="vm.sections.length === 0">
             </div>
-            <ul ng-repeat="section in vm.sections track by $index">
-                <li class="check">
+            <ul>
+                <li class="check" ng-repeat="section in vm.sections track by $index">
                     <span>{{section.name}}</span>
-                    <input type="checkbox" ng-model="vm.sections[$index].check" ng-change="vm.changeList()">
+                    <input type="checkbox" ng-model="vm.sections[$index].check" ng-click="vm.getQuestions()">
                 </li>
             </ul>
         </div>

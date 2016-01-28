@@ -19,6 +19,7 @@ define([], function() {
         vm.numChecked = 0;
         vm.isAnyChecked = false;
         vm.tabActive = 0;
+        vm.questions = [];
 
         /* User */
         vm.user = UserDataSer.getUserCookie();
@@ -64,7 +65,7 @@ define([], function() {
             return _.reduce(vm.sections, function(check, item) {
                 return item.check && check;
             }, true);
-        };
+        }
 
         vm.checkAll = function() {
             var checkAll = true;
@@ -80,13 +81,14 @@ define([], function() {
                 item.check = checkAll;
             });
             vm.isAnyChecked = checkAll;
-        };
+            vm.getQuestions();
+        }
 
         vm.uncheckAll = function() {
             _.each(vm.sections, function(item) {
                 item.check = false;
             });
-        };
+        }
 
         vm.changeList = function() {
             vm.numChecked = 0;
@@ -99,17 +101,27 @@ define([], function() {
             if(vm.numChecked === 0) {
                 vm.isAnyChecked = false;
             }
-        };
+        }
         /* Section */
 
         /* Questions stats */
-        QuestionDataSer.getQuestionsOfSectionData(1).then(function(questions) {
-            vm.questions = _.map(questions, function(question) {
-                return new QuestionDataModel.QuestionData(question);
+        vm.getQuestions = function() {
+            vm.questions = [];
+            var checkList = getCheckList();
+            _.each(checkList, function(item, index) {
+                getQuestionsOfSection(item.id);
             });
-            vm.questionSelected = vm.questions[vm.questions.length - 1];
-            console.log(vm.questions);
-        });
+        }
+
+        function getQuestionsOfSection(id) {
+            QuestionDataSer.getQuestionsOfSectionData(id).then(function(questions) {
+                var questionList = _.map(questions, function(question) {
+                    return new QuestionDataModel.QuestionData(question);
+                });
+                vm.questions = Array.prototype.concat(vm.questions, questionList);
+                vm.questionSelected = vm.questions[vm.questions.length - 1];
+            });
+        };
         /* Questions stats */
 
         /* Student stats */

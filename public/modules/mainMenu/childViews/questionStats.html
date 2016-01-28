@@ -1,14 +1,31 @@
 <div class="question-stats-layout">
     <div class="question-stats-select">
         <span class="question-stats-select-title">Seleccione Pregunta:</span>
-        <select ng-options="item as item.name for item in vm.questions track by item.id" ng-model="vm.questionSelected"></select>
+        <select ng-show="vm.questions.length > 0" ng-options="item as item.name for item in vm.questions track by item.id" ng-model="vm.questionSelected"></select>
+        <select ng-show="vm.questions.length === 0"><option>Seleccione un tema que tenga preguntas asociadas</option></select>
     </div>
 
-    <div class="question-stats-detail">
-        {{vm.questionSelected}}
+    <div class="question-stats-detail" ng-show="vm.questions.length > 0">
+        <div class="question-stats-detail-question">{{vm.questionSelected.text}}</div>
+        <div class="question-stats-detail-answer">
+            A) {{vm.questionSelected.answerA}}
+            <img src="resources/icons/tick.png" class="icon-tick" ng-show="vm.questionSelected.solution === 'A'">
+        </div>
+        <div class="question-stats-detail-answer">
+            B) {{vm.questionSelected.answerB}}
+            <img src="resources/icons/tick.png" class="icon-tick" ng-show="vm.questionSelected.solution === 'B'">
+        </div>
+        <div class="question-stats-detail-answer">
+            C) {{vm.questionSelected.answerC}}
+            <img src="resources/icons/tick.png" class="icon-tick" ng-show="vm.questionSelected.solution === 'C'">
+        </div>
+        <div class="question-stats-detail-answer">
+            D) {{vm.questionSelected.answerD}}
+            <img src="resources/icons/tick.png" class="icon-tick" ng-show="vm.questionSelected.solution === 'D'">
+        </div>
     </div>
 
-    <div class="question-stats-graph">
-
+    <div class="question-stats-graph" ng-show="vm.questions.length > 0">
+        Gráfica
     </div>
 </div>

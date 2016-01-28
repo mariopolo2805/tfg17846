@@ -10,10 +10,10 @@ define(['angular'], function(angular) {
                 this.text = json.text;
                 this.name = json.idQuestion + ' - ' + json.text;
                 this.difficulty = json.difficulty;
-                this.answer1 = json.answer1;
-                this.answer2 = json.answer2;
-                this.answer3 = json.answer3;
-                this.answer4 = json.answer4;
+                this.answerA = json.answerA;
+                this.answerB = json.answerB;
+                this.answerC = json.answerC;
+                this.answerD = json.answerD;
                 this.solution = json.solution;
             } else {
                 this.id = null;

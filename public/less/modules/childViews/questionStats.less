@@ -8,6 +8,7 @@
 .question-stats-layout {
     .flex-display();
     .flex-direction(column);
+    .typ16-400-black;
 
     .question-stats-select {
         .flex-display();
@@ -19,5 +20,32 @@
         select, option {
             width: 480px;
         }
+    }
+
+    .question-stats-detail {
+        .flex-display();
+        .flex-direction(column);
+        .justify-content(space-between);
+        padding: 0 20px;
+
+        .question-stats-detail-question {
+            padding-bottom: 15px;
+        }
+
+        .question-stats-detail-answer {
+            .flex-display();
+            .flex-direction(row);
+            .align-items(center);
+            padding-bottom: 10px;
+        }
+
+        .icon-tick {
+            margin-left: 5px;
+            padding-bottom: 2px;
+        }
+    }
+
+    .question-stats-graph {
+        padding: 15px 20px;
     }
 }

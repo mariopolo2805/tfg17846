@@ -23,7 +23,6 @@ define([], function() {
 
         /* User */
         vm.user = UserDataSer.getUserCookie();
-        console.log("Login with ", vm.user);
         /* User */
 
         /* Group with subject of teacher */

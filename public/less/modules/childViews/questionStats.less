@@ -46,6 +46,34 @@
     }
 
     .question-stats-graph {
+        .flex-display();
+        .flex-direction(row);
+        .justify-content(space-around);
+        .align-items(center);
         padding: 15px 20px;
+
+        .question-stats-graph-left {
+            height: 250px;
+            width: 250px;
+            background-color: red;
+        }
+
+        .question-stats-graph-right {
+            .flex-display();
+            .flex-direction(column);
+            .justify-content(space-between);
+            .typ18-400-black;
+
+            .question-stats-graph-percent {
+                .flex-display();
+                .flex-direction(row);
+                .align-items(center);
+                margin: 10px 0;
+                img {
+                    margin-right: 5px;
+                    padding-bottom: 2px;
+                }
+            }
+        }
     }
 }

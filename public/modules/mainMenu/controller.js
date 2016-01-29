@@ -122,6 +122,10 @@ define([], function() {
                 vm.questionSelected = vm.questions[vm.questions.length - 1];
             });
         };
+
+        vm.percentRight = 30;
+        vm.percentWrong = 34;
+        vm.percentNoAnswer = 36;
         /* Questions stats */
 
         /* Student stats */

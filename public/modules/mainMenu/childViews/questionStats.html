@@ -2,7 +2,7 @@
     <div class="question-stats-select">
         <span class="question-stats-select-title">Seleccione Pregunta:</span>
         <select ng-show="vm.questions.length > 0" ng-options="item as item.name for item in vm.questions track by item.id" ng-model="vm.questionSelected"></select>
-        <select ng-show="vm.questions.length === 0"><option>Seleccione un tema que tenga preguntas asociadas</option></select>
+        <select ng-show="vm.questions.length === 0"><option>Seleccione temas del menú izquierdo con preguntas asociadas</option></select>
     </div>
 
     <div class="question-stats-detail" ng-show="vm.questions.length > 0">
@@ -26,6 +26,17 @@
     </div>
 
     <div class="question-stats-graph" ng-show="vm.questions.length > 0">
-        Gráfica
+        <div class="question-stats-graph-left">Gráfica</div>
+        <div class="question-stats-graph-right">
+            <div class="question-stats-graph-percent">
+                <img src="resources/icons/tick32.png">{{vm.percentRight}}% Respuestas Correctas
+            </div>
+            <div class="question-stats-graph-percent">
+                <img src="resources/icons/tick32.png">{{vm.percentWrong}}% Respuestas Incorrectas
+            </div>
+            <div class="question-stats-graph-percent">
+                <img src="resources/icons/tick32.png">{{vm.percentNoAnswer}}% No sabe / No contesta
+            </div>
+        </div>
     </div>
 </div>

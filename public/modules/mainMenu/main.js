@@ -5,7 +5,7 @@ define([
     'use strict';
 
     angular
-        .module('tfg.mainMenu', ['ui.router'])
+        .module('tfg.mainMenu', ['chart.js', 'ui.router'])
         .controller('MainMenuCtrl', [
             '$state',
             'UserDataSer',

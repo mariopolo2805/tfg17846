@@ -125,6 +125,9 @@ define([], function() {
         vm.percentRight = 30;
         vm.percentWrong = 34;
         vm.percentNoAnswer = 36;
+
+        vm.data = [300, 500, 100];
+        vm.labels = ['A', 'B', 'C'];
         /* Questions stats */
 
         /* Student stats */

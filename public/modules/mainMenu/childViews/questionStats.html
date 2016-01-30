@@ -25,9 +25,12 @@
         </div>
     </div>
 
-    <div class="question-stats-graph" ng-show="vm.questions.length > 0">
-        <div class="question-stats-graph-left">Gráfica</div>
-        <div class="question-stats-graph-right">
+    <div class="question-stats-graph" ng-if="vm.questions.length > 0">
+        <canvas id="pie" class="chart chart-pie"
+            chart-data="vm.data" chart-labels="vm.labels" chart-legend="true">
+        </canvas>
+
+        <div class="question-stats-graph-percents">
             <div class="question-stats-graph-percent">
                 <img src="resources/icons/tick32.png">{{vm.percentRight}}% Respuestas Correctas
             </div>

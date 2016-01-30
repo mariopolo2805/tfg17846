@@ -7,7 +7,9 @@
 
         paths: {
             'angular': ['lib/angular/angular'],
+            'angular-chart': ['lib/angular-chart.js/dist/angular-chart'],
             'angular-cookies': ['lib/angular-cookies/angular-cookies'],
+            'chart': ['lib/chart.js/Chart'],
             'crypto-js': ['lib/crypto-js/crypto-js'],
             'jquery': ['lib/jquery/dist/jquery'],
             'ui-router': ['lib/angular-ui-router/release/angular-ui-router'],
@@ -20,6 +22,7 @@
                 deps: ['jquery'],
                 exports: 'angular'
             },
+            'angular-chart': ['angular', 'chart'],
             'angular-cookies': ['angular'],
             'ui-router': ['angular'],
             'ui-bootstrap': ['angular'],
@@ -36,6 +39,7 @@
     // Load the app
     require([
         'angular',
+        'angular-chart',
         'angular-cookies',
         'ui-router',
         'ui-bootstrap',

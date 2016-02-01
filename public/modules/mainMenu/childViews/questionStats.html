@@ -25,9 +25,9 @@
         </div>
     </div>
 
-    <div class="question-stats-graph" ng-if="vm.questions.length > 0">
+    <div class="question-stats-graph" ng-show="vm.questions.length > 0 && vm.answers.length > 0">
         <canvas id="pie" class="chart chart-pie"
-            chart-data="vm.data" chart-labels="vm.labels" chart-legend="true">
+            chart-data="vm.rates" chart-labels="vm.labels" chart-legend="true" chart-colours="vm.colors">
         </canvas>
 
         <div class="question-stats-graph-percents">

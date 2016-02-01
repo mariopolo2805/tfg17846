@@ -2,6 +2,7 @@ define([], function() {
     'use strict';
 
     function MainMenuCtrl(
+        $scope,
         $state,
         UserDataSer,
         GroupDataSer,
@@ -9,7 +10,9 @@ define([], function() {
         SectionDataSer,
         SectionDataModel,
         QuestionDataSer,
-        QuestionDataModel) {
+        QuestionDataModel,
+        AnswerDataModel,
+        AnswerDataSer) {
 
         var vm = this;
         vm.user = null;
@@ -20,6 +23,7 @@ define([], function() {
         vm.isAnyChecked = false;
         vm.tabActive = 0;
         vm.questions = [];
+        vm.questionSelected = null;
 
         /* User */
         vm.user = UserDataSer.getUserCookie();
@@ -114,20 +118,55 @@ define([], function() {
 
         function getQuestionsOfSection(id) {
             QuestionDataSer.getQuestionsOfSectionData(id).then(function(questions) {
-                var questionList = _.map(questions, function(question) {
-                    return new QuestionDataModel.QuestionData(question);
+                var questionList = _.map(questions, function(question, index) {
+                    var q = new QuestionDataModel.QuestionData(question);
+                    q.name = q.name.substr(0, 2) + (index + 1) + q.name.substr(2);
+                    return q;
                 });
                 vm.questions = Array.prototype.concat(vm.questions, questionList);
                 vm.questionSelected = vm.questions[vm.questions.length - 1];
             });
         };
 
-        vm.percentRight = 30;
-        vm.percentWrong = 34;
-        vm.percentNoAnswer = 36;
+        $scope.$watch(
+            "vm.questionSelected",
+            function handleFooChange(newValue, oldValue) {
+                if(vm.questionSelected) {
+                    getAnswers();
+                }
+            }
+        );
 
-        vm.data = [300, 500, 100];
-        vm.labels = ['A', 'B', 'C'];
+        function getAnswers() {
+            AnswerDataSer.getAnswersOfQuestionData(vm.questionSelected.id).then(function(answers) {
+                vm.answers = _.map(answers, function(answer) {
+                    return new AnswerDataModel.AnswerData(answer);
+                });
+                calculateRates();
+            });
+        }
+
+        vm.labels = ['Correctas', 'Incorrectas', 'NS / NC'];
+        vm.colors = ['#44C767', '#F72F2F', '#F89B3A'];
+
+        function calculateRates() {
+            vm.rates = [0, 0, 0];
+            _.each(vm.answers, function(answer) {
+                console.log(answer);
+                if(answer.selection === null) {
+                    vm.rates[2]++;
+                }
+                else if(answer.selection === vm.questionSelected.solution) {
+                    vm.rates[0]++;
+                } else {
+                    vm.rates[1]++;
+                }
+            });
+            var sum = vm.rates[0] + vm.rates[1] + vm.rates[2];
+            vm.percentRight = Math.round(vm.rates[0] * 100 / sum);
+            vm.percentWrong = Math.round(vm.rates[1] * 100 / sum);
+            vm.percentNoAnswer = Math.round(vm.rates[2] * 100 / sum);
+        }
         /* Questions stats */
 
         /* Student stats */

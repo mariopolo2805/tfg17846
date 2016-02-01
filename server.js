@@ -219,3 +219,56 @@ app.post('/questionsOfSection/:id', function(req, res) {
         }
     });
 });
+
+/* Answer Queries */
+
+app.post('/answers', function(req, res) {
+    var query = "SELECT * FROM tfg.Answer";
+    connection.query(query, function(err, rows) {
+        if(err) {
+            console.error("Problem with MySQL" + err);
+        } else {
+            var json = JSON.stringify(rows);
+            res.send(json);
+        }
+    });
+});
+
+app.post('/answer/:id', function(req, res) {
+    var id = req.params.id;
+    var query = "SELECT * FROM tfg.Answer WHERE idAnswer='" + id + "'";
+    connection.query(query, function(err, rows) {
+        if(err) {
+            console.error("Problem with MySQL" + err);
+        } else {
+            var json = JSON.stringify(rows[0]);
+            res.send(json);
+        }
+    });
+});
+
+app.post('/answersOfQuestion/:id', function(req, res) {
+    var id = req.params.id;
+    var query = "SELECT * FROM tfg.Answer WHERE idQuestion='" + id + "'";
+    connection.query(query, function(err, rows) {
+        if(err) {
+            console.error("Problem with MySQL" + err);
+        } else {
+            var json = JSON.stringify(rows);
+            res.send(json);
+        }
+    });
+});
+
+app.post('/answersOfStudent/:id', function(req, res) {
+    var id = req.params.id;
+    var query = "SELECT * FROM tfg.Answer WHERE idStudent='" + id + "'";
+    connection.query(query, function(err, rows) {
+        if(err) {
+            console.error("Problem with MySQL" + err);
+        } else {
+            var json = JSON.stringify(rows);
+            res.send(json);
+        }
+    });
+});

@@ -4,7 +4,8 @@ define([
     './subjectDataSer',
     './groupDataSer',
     './sectionDataSer',
-    './questionDataSer'
+    './questionDataSer',
+    './answerDataSer'
 ], function(angular) {
     'use strict';
 
@@ -13,6 +14,7 @@ define([
         'tfg.services.subjectDataSer',
         'tfg.services.groupDataSer',
         'tfg.services.sectionDataSer',
-        'tfg.services.questionDataSer'
+        'tfg.services.questionDataSer',
+        'tfg.services.answerDataSer'
     ]);
 });

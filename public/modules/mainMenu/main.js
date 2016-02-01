@@ -7,6 +7,7 @@ define([
     angular
         .module('tfg.mainMenu', ['chart.js', 'ui.router'])
         .controller('MainMenuCtrl', [
+            '$scope',
             '$state',
             'UserDataSer',
             'GroupDataSer',
@@ -15,6 +16,8 @@ define([
             'SectionDataModel',
             'QuestionDataSer',
             'QuestionDataModel',
+            'AnswerDataModel',
+            'AnswerDataSer',
             controller.MainMenuCtrl])
         .controller('EditableChecksCtrl', [controller.EditableChecksCtrl])
         .config(function($stateProvider) {

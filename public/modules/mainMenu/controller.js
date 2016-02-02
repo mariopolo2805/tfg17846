@@ -24,6 +24,7 @@ define([], function() {
         vm.tabActive = 0;
         vm.questions = [];
         vm.questionSelected = null;
+        vm.answers = [];
 
         /* User */
         vm.user = UserDataSer.getUserCookie();
@@ -45,6 +46,7 @@ define([], function() {
 
         /* Section */
         function getSections() {
+            vm.questions = [];
             SectionDataSer.getSectionsOfGroupData(vm.groups[vm.groupActive].id).then(function(sections) {
                 vm.sections = _.map(sections, function(section) {
                     var s = new SectionDataModel.SectionData(section);
@@ -91,6 +93,7 @@ define([], function() {
             _.each(vm.sections, function(item) {
                 item.check = false;
             });
+            vm.getQuestions();
         }
 
         vm.changeList = function() {
@@ -146,13 +149,11 @@ define([], function() {
             });
         }
 
-        vm.labels = ['Correctas', 'Incorrectas', 'NS / NC'];
         vm.colors = ['#44C767', '#F72F2F', '#F89B3A'];
 
         function calculateRates() {
             vm.rates = [0, 0, 0];
             _.each(vm.answers, function(answer) {
-                console.log(answer);
                 if(answer.selection === null) {
                     vm.rates[2]++;
                 }
@@ -162,10 +163,12 @@ define([], function() {
                     vm.rates[1]++;
                 }
             });
-            var sum = vm.rates[0] + vm.rates[1] + vm.rates[2];
-            vm.percentRight = Math.round(vm.rates[0] * 100 / sum);
-            vm.percentWrong = Math.round(vm.rates[1] * 100 / sum);
-            vm.percentNoAnswer = Math.round(vm.rates[2] * 100 / sum);
+            vm.sum = vm.rates[0] + vm.rates[1] + vm.rates[2];
+            vm.percentRight = Math.round((vm.rates[0] * 100 / vm.sum) * 100) / 100;
+            vm.percentWrong = Math.round((vm.rates[1] * 100 / vm.sum) * 100) / 100;
+            vm.percentNoAnswer = Math.round((vm.rates[2] * 100 / vm.sum) * 100) / 100;
+            vm.labels = [vm.percentRight + '%', vm.percentWrong + '%', vm.percentNoAnswer + '%'];
+
         }
         /* Questions stats */
 

@@ -24,10 +24,10 @@
     <div class="menu-center">
         <span class="menu-center-title">{{vm.groups[vm.groupActive].subject.name}} - Grupo {{vm.groups[vm.groupActive].group | limitTo : 5 : 1}}</span>
         <ul class="menu-center-tabset">
-            <li ng-class="{active: vm.tabActive === 0}" ng-click="vm.tabActive = 0"><a ui-sref=".questionStats">Estadísticas por Pregunta</a></li>
-            <li ng-class="{active: vm.tabActive === 1}" ng-click="vm.tabActive = 1"><a ui-sref=".studentStats">Estadísticas por Estudiante</a></li>
-            <li ng-class="{active: vm.tabActive === 2}" ng-click="vm.tabActive = 2"><a ui-sref=".newQuestion">Nueva Pregunta</a></li>
-            <li ng-class="{active: vm.tabActive === 3}" ng-click="vm.tabActive = 3"><a ui-sref=".editQuestion">Editar Pregunta</a></li>
+            <li ng-class="{active: vm.tabActive === 0}" ng-click="vm.tabActive = 0; vm.uncheckAll()"><a ui-sref=".questionStats">Estadísticas por Pregunta</a></li>
+            <li ng-class="{active: vm.tabActive === 1}" ng-click="vm.tabActive = 1; vm.uncheckAll()"><a ui-sref=".studentStats">Estadísticas por Estudiante</a></li>
+            <li ng-class="{active: vm.tabActive === 2}" ng-click="vm.tabActive = 2; vm.uncheckAll()"><a ui-sref=".newQuestion">Nueva Pregunta</a></li>
+            <li ng-class="{active: vm.tabActive === 3}" ng-click="vm.tabActive = 3; vm.uncheckAll()"><a ui-sref=".editQuestion">Editar Pregunta</a></li>
         </ul>
         <div ui-view=""></div>
     </div>

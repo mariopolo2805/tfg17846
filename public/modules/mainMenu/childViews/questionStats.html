@@ -32,14 +32,21 @@
 
         <div class="question-stats-graph-percents">
             <div class="question-stats-graph-percent">
-                <img src="resources/icons/tick32.png">{{vm.percentRight}}% Respuestas Correctas
+                <img src="resources/icons/tick32.png">Respuestas Correctas {{vm.rates[0]}}
             </div>
             <div class="question-stats-graph-percent">
-                <img src="resources/icons/wrong32.png">{{vm.percentWrong}}% Respuestas Incorrectas
+                <img src="resources/icons/wrong32.png">Respuestas Incorrectas {{vm.rates[1]}}
             </div>
             <div class="question-stats-graph-percent">
-                <img src="resources/icons/sad32.png">{{vm.percentNoAnswer}}% No sabe / No contesta
+                <img src="resources/icons/sad32.png">No sabe / No contesta {{vm.rates[2]}}
+            </div>
+            <div class="question-stats-graph-percent">
+                <span>Total de Respuestas: </span>{{vm.sum}}
             </div>
         </div>
+    </div>
+
+    <div class="question-stats-advice" ng-show="vm.questions.length > 0 && vm.answers.length === 0">
+        (*) INFO: Todavía no se han registrado respuestas para esta pregunta
     </div>
 </div>

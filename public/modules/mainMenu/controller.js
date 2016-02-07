@@ -5,14 +5,15 @@ define([], function() {
         $scope,
         $state,
         UserDataSer,
+        UserDataModel,
         GroupDataSer,
         GroupDataModel,
         SectionDataSer,
         SectionDataModel,
         QuestionDataSer,
         QuestionDataModel,
-        AnswerDataModel,
-        AnswerDataSer) {
+        AnswerDataSer,
+        AnswerDataModel) {
 
         var vm = this;
         vm.user = null;
@@ -22,9 +23,12 @@ define([], function() {
         vm.numChecked = 0;
         vm.isAnyChecked = false;
         vm.tabActive = 0;
+        vm.colors = ['#44C767', '#F72F2F', '#F89B3A'];
         vm.questions = [];
         vm.questionSelected = null;
         vm.answers = [];
+        vm.students = [];
+        vm.studentSelected = null;
 
         /* User */
         vm.user = UserDataSer.getUserCookie();
@@ -62,6 +66,10 @@ define([], function() {
             });
         }
 
+        vm.clickCheck = function() {
+            getQuestions();
+        }
+
         vm.allChecked = function() {
             if(vm.sections.length === 0) {
                 return;
@@ -86,14 +94,20 @@ define([], function() {
                 item.check = checkAll;
             });
             vm.isAnyChecked = checkAll;
-            vm.getQuestions();
+
+            getQuestions();
         }
 
         vm.uncheckAll = function() {
             _.each(vm.sections, function(item) {
                 item.check = false;
             });
-            vm.getQuestions();
+
+            if(vm.tabActive === 0) {
+                getQuestions();
+            } else if(vm.tabActive === 1) {
+                getStudents();
+            }
         }
 
         vm.changeList = function() {
@@ -111,11 +125,15 @@ define([], function() {
         /* Section */
 
         /* Questions stats */
-        vm.getQuestions = function() {
+        function getQuestions() {
             vm.questions = [];
+            vm.studentAnswers = [];
             var checkList = getCheckList();
             _.each(checkList, function(item, index) {
                 getQuestionsOfSection(item.id);
+                if(vm.tabActive === 1 && vm.studentSelected) {
+                    getAnswersOfStudentInSection(item.id);
+                }
             });
         }
 
@@ -123,11 +141,23 @@ define([], function() {
             QuestionDataSer.getQuestionsOfSectionData(id).then(function(questions) {
                 var questionList = _.map(questions, function(question, index) {
                     var q = new QuestionDataModel.QuestionData(question);
-                    q.name = q.name.substr(0, 2) + (index + 1) + q.name.substr(2);
+                    q.title = q.idSection + '.' + (index + 1) + ' - ' + q.text;
                     return q;
                 });
                 vm.questions = Array.prototype.concat(vm.questions, questionList);
                 vm.questionSelected = vm.questions[vm.questions.length - 1];
+            });
+        };
+
+        function getAnswersOfStudentInSection(id) {
+            AnswerDataSer.getAnswersOfStudentInSectionData(vm.studentSelected.id, id).then(function(answers) {
+                var answerList = _.map(answers, function(answer) {
+                    var a = new AnswerDataModel.AnswerData(answer);
+                    a.solution = answer.solution;
+                    return a;
+                });
+                vm.studentAnswers = Array.prototype.concat(vm.studentAnswers, answerList);
+                calculateStudentRates();
             });
         };
 
@@ -145,13 +175,13 @@ define([], function() {
                 vm.answers = _.map(answers, function(answer) {
                     return new AnswerDataModel.AnswerData(answer);
                 });
-                calculateRates();
+                if(vm.tabActive === 0) {
+                    calculateQuestionRates();
+                }
             });
         }
 
-        vm.colors = ['#44C767', '#F72F2F', '#F89B3A'];
-
-        function calculateRates() {
+        function calculateQuestionRates() {
             vm.rates = [0, 0, 0];
             _.each(vm.answers, function(answer) {
                 if(answer.selection === null) {
@@ -168,11 +198,48 @@ define([], function() {
             vm.percentWrong = Math.round((vm.rates[1] * 100 / vm.sum) * 100) / 100;
             vm.percentNoAnswer = Math.round((vm.rates[2] * 100 / vm.sum) * 100) / 100;
             vm.labels = [vm.percentRight + '%', vm.percentWrong + '%', vm.percentNoAnswer + '%'];
-
         }
         /* Questions stats */
 
         /* Student stats */
+        function getStudents() {
+            vm.students = [];
+            UserDataSer.getStudentsOfSubjectData(vm.groups[vm.groupActive].idSubject).then(function(students) {
+                vm.students = _.map(students, function(student, index) {
+                    var s = new UserDataModel.UserData(student);
+                    s.title = (index + 1) + ' - ' + s.surname + ', ' + s.name;
+                    return s;
+                });
+                vm.studentSelected = vm.students[vm.students.length - 1];
+            });
+        }
+
+        $scope.$watch(
+            "vm.studentSelected",
+            function handleFooChange(newValue, oldValue) {
+                if(vm.studentSelected) {
+                    getQuestions();
+                }
+            }
+        );
+
+        function calculateStudentRates() {
+            vm.rates = [0, 0, 0];
+            _.each(vm.studentAnswers, function(answer) {
+                if(answer.selection === null) {
+                    vm.rates[2]++;
+                } else if(answer.selection === answer.solution) {
+                    vm.rates[0]++;
+                } else {
+                    vm.rates[1]++;
+                }
+            });
+            vm.sum = vm.rates[0] + vm.rates[1] + vm.rates[2];
+            vm.percentRight = Math.round((vm.rates[0] * 100 / vm.sum) * 100) / 100;
+            vm.percentWrong = Math.round((vm.rates[1] * 100 / vm.sum) * 100) / 100;
+            vm.percentNoAnswer = Math.round((vm.rates[2] * 100 / vm.sum) * 100) / 100;
+            vm.labels = [vm.percentRight + '%', vm.percentWrong + '%', vm.percentNoAnswer + '%'];
+        }
         /* Student stats */
 
         /* New question */

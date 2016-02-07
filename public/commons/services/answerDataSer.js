@@ -30,9 +30,9 @@ define(['angular'], function(angular) {
             });
         };
 
-        this.getAnswersOfStudentData = function(id) {
+        this.getAnswersOfStudentInSectionData = function(id, idSection) {
             return $http({
-                url: 'http://localhost:9000/answersOfStudent/' + id,
+                url: 'http://localhost:9000/answersOfStudent/' + id + '/section/' + idSection,
                 method: 'POST'
             }).then(function(result) {
                 return result.data;

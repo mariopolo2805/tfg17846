@@ -1,7 +1,7 @@
-<div class="question-stats-layout">
+<div class="question-stats-layout" ng-show="vm.tabActive === 0">
     <div class="question-stats-select">
         <span class="question-stats-select-title">Seleccione Pregunta:</span>
-        <select ng-show="vm.questions.length > 0" ng-options="item as item.name for item in vm.questions track by item.id" ng-model="vm.questionSelected"></select>
+        <select ng-show="vm.questions.length > 0" ng-options="item as item.title for item in vm.questions track by item.id" ng-model="vm.questionSelected"></select>
         <select ng-show="vm.questions.length === 0"><option>Seleccione temas del menú izquierdo con preguntas asociadas</option></select>
     </div>
 

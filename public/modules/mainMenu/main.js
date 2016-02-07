@@ -10,14 +10,15 @@ define([
             '$scope',
             '$state',
             'UserDataSer',
+            'UserDataModel',
             'GroupDataSer',
             'GroupDataModel',
             'SectionDataSer',
             'SectionDataModel',
             'QuestionDataSer',
             'QuestionDataModel',
-            'AnswerDataModel',
             'AnswerDataSer',
+            'AnswerDataModel',
             controller.MainMenuCtrl])
         .controller('EditableChecksCtrl', [controller.EditableChecksCtrl])
         .config(function($stateProvider) {

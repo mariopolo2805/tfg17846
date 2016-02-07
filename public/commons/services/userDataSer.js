@@ -12,6 +12,15 @@ define(['angular'], function(angular) {
             });
         };
 
+        this.getStudentsOfSubjectData = function(id) {
+            return $http({
+                url: 'http://localhost:9000/studentsOfSubject/' + id,
+                method: 'POST'
+            }).then(function(result) {
+                return result.data;
+            });
+        };
+
         this.getUserCookie = function() {
             var user = $cookies.getObject('user');
             if(angular.isUndefined(user)) {

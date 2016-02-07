@@ -8,7 +8,6 @@ define(['angular'], function(angular) {
                 this.id = json.idQuestion;
                 this.idSection = json.idSection;
                 this.text = json.text;
-                this.name = json.idSection + '. - ' + json.text;
                 this.difficulty = json.difficulty;
                 this.answerA = json.answerA;
                 this.answerB = json.answerB;
@@ -19,7 +18,6 @@ define(['angular'], function(angular) {
                 this.id = null;
                 this.idSection = null;
                 this.text = null;
-                this.name = '? - NoData';
                 this.difficulty = null;
                 this.answer1 = null;
                 this.answer2 = null;

@@ -15,7 +15,7 @@
             <ul>
                 <li class="check" ng-repeat="section in vm.sections track by $index">
                     <span>{{section.name}}</span>
-                    <input type="checkbox" ng-model="vm.sections[$index].check" ng-click="vm.getQuestions()">
+                    <input type="checkbox" ng-model="vm.sections[$index].check" ng-click="vm.clickCheck()">
                 </li>
             </ul>
         </div>

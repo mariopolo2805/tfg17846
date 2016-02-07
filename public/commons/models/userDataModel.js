@@ -8,9 +8,9 @@ define(['angular'], function(angular) {
                 this.id = json.idUser;
                 this.name = json.name;
                 this.surname = json.surname;
-                this.email = json.email;
-                this.password = json.password;
-                this.isTeacher = (json.email.includes('@uam')) ? true : false;
+                this.email = json.email ? json.email : null;
+                this.password = json.password ? json.password : null;
+                this.isTeacher = (json.email && json.email.includes('@uam')) ? true : false;
             } else {
                 this.id = null;
                 this.name = null;

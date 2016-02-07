@@ -1,4 +1,96 @@
-<div class="student-stats-layout">
-    <h2>Estadísticas por Estudiantes</h2>
-    {{vm.tabActive}}
+<div class="student-stats-layout" ng-show="vm.tabActive === 1">
+    <div class="student-stats-select">
+        <span class="student-stats-select-title">Seleccione Estudiante:</span>
+        <select ng-show="vm.students.length > 0" ng-options="item as item.title for item in vm.students track by item.id" ng-model="vm.studentSelected"></select>
+        <select ng-show="vm.students.length === 0"><option>Seleccione temas del menú izquierdo con estudiantes en curso</option></select>
+    </div>
+
+    <div class="student-stats-graph" ng-show="vm.students.length > 0 && vm.studentAnswers.length > 0">
+        <canvas id="pie" class="chart chart-pie"
+            chart-data="vm.rates" chart-labels="vm.labels" chart-legend="true" chart-colours="vm.colors">
+        </canvas>
+
+        <div class="student-stats-graph-percents">
+            <div class="student-stats-graph-percent">
+                <img src="resources/icons/tick32.png">Respuestas Correctas {{vm.rates[0]}}
+            </div>
+            <div class="student-stats-graph-percent">
+                <img src="resources/icons/wrong32.png">Respuestas Incorrectas {{vm.rates[1]}}
+            </div>
+            <div class="student-stats-graph-percent">
+                <img src="resources/icons/sad32.png">No sabe / No contesta {{vm.rates[2]}}
+            </div>
+            <div class="student-stats-graph-percent">
+                <span>Total de Respuestas: </span>{{vm.sum}}
+            </div>
+        </div>
+    </div>
+
+    <div class="student-stats-advice" ng-show="!vm.isAnyChecked">
+        (*) INFO: Seleccione al menos un tema del menú izquierdo
+    </div>
+
+    <div class="student-stats-advice" ng-show="vm.students.length === 0 && vm.isAnyChecked">
+        (*) INFO: Todavía no se han registrado estudiantes para este curso
+    </div>
+
+    <div class="student-stats-advice" ng-show="vm.students.length > 0 && vm.isAnyChecked && vm.studentAnswers.length === 0">
+        (*) INFO: Este estudiante todavía no ha registrado ninguna respuesta en los temas seleccionados
+    </div>
+
 </div>
+
+<!--
+<div class="question-stats-layout">
+    <div class="question-stats-select">
+        <span class="question-stats-select-title">Seleccione Pregunta:</span>
+        <select ng-show="vm.questions.length > 0" ng-options="item as item.name for item in vm.questions track by item.id" ng-model="vm.questionSelected"></select>
+        <select ng-show="vm.questions.length === 0"><option>Seleccione temas del menú izquierdo con preguntas asociadas</option></select>
+    </div>
+
+    <div class="question-stats-detail" ng-show="vm.questions.length > 0">
+        <div class="question-stats-detail-question">{{vm.questionSelected.text}}</div>
+        <div class="question-stats-detail-answer">
+            A) {{vm.questionSelected.answerA}}
+            <img src="resources/icons/tick.png" class="icon-tick" ng-show="vm.questionSelected.solution === 'A'">
+        </div>
+        <div class="question-stats-detail-answer">
+            B) {{vm.questionSelected.answerB}}
+            <img src="resources/icons/tick.png" class="icon-tick" ng-show="vm.questionSelected.solution === 'B'">
+        </div>
+        <div class="question-stats-detail-answer">
+            C) {{vm.questionSelected.answerC}}
+            <img src="resources/icons/tick.png" class="icon-tick" ng-show="vm.questionSelected.solution === 'C'">
+        </div>
+        <div class="question-stats-detail-answer">
+            D) {{vm.questionSelected.answerD}}
+            <img src="resources/icons/tick.png" class="icon-tick" ng-show="vm.questionSelected.solution === 'D'">
+        </div>
+    </div>
+
+    <div class="question-stats-graph" ng-show="vm.questions.length > 0 && vm.answers.length > 0">
+        <canvas id="pie" class="chart chart-pie"
+            chart-data="vm.rates" chart-labels="vm.labels" chart-legend="true" chart-colours="vm.colors">
+        </canvas>
+
+        <div class="question-stats-graph-percents">
+            <div class="question-stats-graph-percent">
+                <img src="resources/icons/tick32.png">Respuestas Correctas {{vm.rates[0]}}
+            </div>
+            <div class="question-stats-graph-percent">
+                <img src="resources/icons/wrong32.png">Respuestas Incorrectas {{vm.rates[1]}}
+            </div>
+            <div class="question-stats-graph-percent">
+                <img src="resources/icons/sad32.png">No sabe / No contesta {{vm.rates[2]}}
+            </div>
+            <div class="question-stats-graph-percent">
+                <span>Total de Respuestas: </span>{{vm.sum}}
+            </div>
+        </div>
+    </div>
+
+    <div class="question-stats-advice" ng-show="vm.questions.length > 0 && vm.answers.length === 0">
+        (*) INFO: Todavía no se han registrado respuestas para esta pregunta
+    </div>
+</div>
+-->

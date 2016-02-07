@@ -6,5 +6,55 @@
 -------------------------------------------------------------------*/
 
 .student-stats-layout {
-    background-color: yellow;
+    .flex-display();
+    .flex-direction(column);
+    .typ16-400-black;
+
+    .student-stats-select {
+        .flex-display();
+        .flex-direction(row);
+        .justify-content(space-between);
+        .align-items(center);
+        padding: 25px 20px;
+
+        select, option {
+            width: 480px;
+        }
+    }
+
+    .student-stats-graph {
+        .flex-display();
+        .flex-direction(row);
+        .justify-content(space-around);
+        .align-items(center);
+        padding: 15px 20px;
+
+        .student-stats-graph-percents {
+            .flex-display();
+            .flex-direction(column);
+            .justify-content(space-between);
+            .typ18-400-black;
+
+            .student-stats-graph-percent {
+                .flex-display();
+                .flex-direction(row);
+                .align-items(center);
+                .justify-content(space-between);
+                margin: 10px 0;
+
+                img {
+                    margin-right: 5px;
+                    padding-bottom: 2px;
+                }
+            }
+        }
+    }
+
+    .student-stats-advice {
+        .flex-display();
+        .flex-direction(row);
+        .align-items(center);
+        padding: 15px 20px;
+        .typ14-400-black;
+    }
 }

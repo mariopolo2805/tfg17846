@@ -57,4 +57,51 @@
         padding: 15px 20px;
         .typ14-400-black;
     }
+
+    .student-stats-questions {
+        .flex-display();
+        .flex-direction(column);
+        .typ16-400-black;
+
+        .student-stats-questions-select {
+            .flex-display();
+            .flex-direction(row);
+            .justify-content(space-between);
+            .align-items(center);
+            padding: 25px 20px;
+
+            select, option {
+                width: 480px;
+            }
+        }
+
+        .student-stats-questions-detail {
+            .flex-display();
+            .flex-direction(column);
+            .justify-content(space-between);
+            padding: 0 20px;
+            word-wrap: break-word;
+
+            .student-stats-questions-question {
+                padding-bottom: 15px;
+            }
+
+            .student-stats-questions-answer {
+                .flex-display();
+                .flex-direction(row);
+                .align-items(center);
+                padding-bottom: 10px;
+            }
+
+            .icon-tick, .icon-wrong {
+                margin-left: 5px;
+                padding-bottom: 2px;
+            }
+        }
+    }
+
+    .icon-sad {
+        margin-right: 5px;
+        padding-bottom: 2px;
+    }
 }

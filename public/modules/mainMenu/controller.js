@@ -130,7 +130,9 @@ define([], function() {
             vm.studentAnswers = [];
             var checkList = getCheckList();
             _.each(checkList, function(item, index) {
-                getQuestionsOfSection(item.id);
+                if(vm.tabActive === 0) {
+                    getQuestionsOfSection(item.id);
+                }
                 if(vm.tabActive === 1 && vm.studentSelected) {
                     getAnswersOfStudentInSection(item.id);
                 }
@@ -150,12 +152,17 @@ define([], function() {
         };
 
         function getAnswersOfStudentInSection(id) {
-            AnswerDataSer.getAnswersOfStudentInSectionData(vm.studentSelected.id, id).then(function(answers) {
-                var answerList = _.map(answers, function(answer) {
-                    var a = new AnswerDataModel.AnswerData(answer);
-                    a.solution = answer.solution;
+            AnswerDataSer.getAnswersOfStudentInSectionData(vm.studentSelected.id, id).then(function(items) {
+                var answerList = _.map(items, function(item, index) {
+                    var q = new QuestionDataModel.QuestionData(item);
+                    q.title = q.idSection + '.' + (index + 1) + ' - ' + q.text;
+                    q.selection = item.selection;
+                    vm.questions.push(q);
+                    var a = new AnswerDataModel.AnswerData(item);
+                    a.solution = item.solution;
                     return a;
                 });
+                vm.questionSelected = vm.questions[vm.questions.length - 1];
                 vm.studentAnswers = Array.prototype.concat(vm.studentAnswers, answerList);
                 calculateStudentRates();
             });

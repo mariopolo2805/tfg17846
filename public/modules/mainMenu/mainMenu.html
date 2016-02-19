@@ -3,19 +3,19 @@
         <div class="menu-options">
             <span class="menu-options-title">Grupos</span>
             <ul>
-                <li class="group" ng-repeat="group in vm.groups track by $index" ng-class="{active: vm.groupActive === $index}" ng-click="vm.groupSelected($index)">{{group.subject.code}} - {{group.group}}</li>
+                <li class="group" ng-repeat="group in vm.groups track by $index" ng-class="{active: vm.groupActive === $index}" ng-click="vm.groupSelected($index); vm.tabActive = 0; vm.uncheckAll()" ui-sref=".questionStats">{{group.subject.code}} - {{group.group}}</li>
             </ul>
         </div>
         <div class="menu-options">
             <span class="menu-options-title">Temas</span>
             <div class="menu-options-selectAll">
-                <span>Seleccionar todos</span>
-                <input type="checkbox" ng-click="vm.checkAll()" ng-checked="vm.allChecked()" ng-disabled="vm.sections.length === 0">
+                <span ng-class="{'typ12-400-grey-light' : vm.onlyOneSection}">Seleccionar todos</span>
+                <input type="checkbox" ng-click="vm.checkAll()" ng-checked="vm.allChecked()" ng-disabled="vm.sections.length === 0 || vm.onlyOneSection">
             </div>
             <ul>
                 <li class="check" ng-repeat="section in vm.sections track by $index">
                     <span>{{section.name}}</span>
-                    <input type="checkbox" ng-model="vm.sections[$index].check" ng-click="vm.clickCheck()">
+                    <input type="checkbox" ng-model="vm.sections[$index].check" ng-click="vm.clickCheck()" ng-disabled="vm.isAnyChecked && vm.onlyOneSection && !vm.sections[$index].check">
                 </li>
             </ul>
         </div>

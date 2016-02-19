@@ -19,6 +19,7 @@ define([], function() {
         vm.user = null;
         vm.groups = [];
         vm.groupActive = 0;
+        vm.onlyOneSection = false;
         vm.sections = [];
         vm.numChecked = 0;
         vm.isAnyChecked = false;
@@ -68,10 +69,11 @@ define([], function() {
 
         vm.clickCheck = function() {
             getQuestions();
+            vm.changeList();
         }
 
         vm.allChecked = function() {
-            if(vm.sections.length === 0) {
+            if(vm.sections.length === 0 || vm.onlyOneSection) {
                 return;
             }
             vm.changeList(vm.sections);
@@ -105,8 +107,14 @@ define([], function() {
 
             if(vm.tabActive === 0) {
                 getQuestions();
+                vm.onlyOneSection = false;
             } else if(vm.tabActive === 1) {
                 getStudents();
+                vm.onlyOneSection = false;
+            } else if(vm.tabActive === 2) {
+                vm.onlyOneSection = true;
+            } else if(vm.tabActive === 3) {
+                vm.onlyOneSection = true;
             }
         }
 
@@ -193,8 +201,7 @@ define([], function() {
             _.each(vm.answers, function(answer) {
                 if(answer.selection === null) {
                     vm.rates[2]++;
-                }
-                else if(answer.selection === vm.questionSelected.solution) {
+                } else if(answer.selection === vm.questionSelected.solution) {
                     vm.rates[0]++;
                 } else {
                     vm.rates[1]++;
@@ -250,6 +257,7 @@ define([], function() {
         /* Student stats */
 
         /* New question */
+        vm.options = ['A', 'B', 'C', 'D'];
         /* New question */
 
         /* Edit question */

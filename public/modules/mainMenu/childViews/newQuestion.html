@@ -1,4 +1,37 @@
 <div class="new-question-layout" ng-show="vm.tabActive === 2">
-    <h2>Nueva Pregunta</h2>
-    {{vm.tabActive}}
+    <div class="new-question-text-content">
+        <span class="new-question-text-title">Introduzca Enunciado:</span>
+        <textarea class="new-question-text-area" ng-model="vm.newQuestion.text"></textarea>
+    </div>
+
+    <div class="new-question-answers-content">
+        <span class="new-question-answers-title">Introduzca Respuestas:</span>
+        <div class="new-question-answers-answer">
+            <label class="new-question-answers-answer-label">A)</label>
+            <input type="text" class="new-question-answers-answer-input" ng-model="vm.newQuestion.a">
+        </div>
+        <div class="new-question-answers-answer">
+            <label class="new-question-answers-answer-label">B)</label>
+            <input type="text" class="new-question-answers-answer-input" ng-model="vm.newQuestion.b">
+        </div>
+        <div class="new-question-answers-answer">
+            <label class="new-question-answers-answer-label">C)</label>
+            <input type="text" class="new-question-answers-answer-input" ng-model="vm.newQuestion.c">
+        </div>
+        <div class="new-question-answers-answer">
+            <label class="new-question-answers-answer-label">D)</label>
+            <input type="text" class="new-question-answers-answer-input" ng-model="vm.newQuestion.c">
+        </div>
+    </div>
+
+    <div class="new-question-answers-options">
+        <div class="new-question-answers-options-option">
+            <span class="new-question-answers-options-title">Seleccione Respuesta Correcta:</span>
+            <select ng-options="item as item for item in vm.options track by item" class="new-question-answers-options-input" ng-model="vm.newQuestion.correct"></select>
+        </div>
+        <div class="new-question-answers-options-option">
+            <span class="new-question-answers-options-title">Seleccione Dificultad:</span>
+            <input type="number" class="new-question-answers-options-input" min="0" max="4" ng-model="vm.newQuestion.difficulty">
+        </div>
+    </div>
 </div>

@@ -139,12 +139,15 @@ define([], function() {
             var checkList = getCheckList();
             _.each(checkList, function(item, index) {
                 if(vm.tabActive === 0) {
-                    getQuestionsOfSection(item.id);
+                    return getQuestionsOfSection(item.id);
                 }
                 if(vm.tabActive === 1 && vm.studentSelected) {
-                    getAnswersOfStudentInSection(item.id);
+                    return getAnswersOfStudentInSection(item.id);
                 }
             });
+            if(vm.tabActive === 2 && checkList.length > 0) {
+                return vm.newQuestion.idSection = checkList[0].id;
+            }
         }
 
         function getQuestionsOfSection(id) {
@@ -258,6 +261,35 @@ define([], function() {
 
         /* New question */
         vm.options = ['A', 'B', 'C', 'D'];
+        vm.newQuestion = new QuestionDataModel.QuestionData();
+        delete vm.newQuestion.id;
+        vm.newQuestion.solution = vm.options[0];
+
+
+
+        vm.sendQuestion = function() {
+            if(checkQuestionValidity(vm.newQuestion)) {
+                alert("Valide haber seleccionado el tema (en el panel izquierdo) al que asignarle la pregunta");
+            } else {
+                var today = new Date();
+                today.setMinutes(today.getMinutes() + vm.newQuestion.minutes);
+                today.setHours(today.getHours() + 1);
+                var mysqlDate = today.toISOString();
+                mysqlDate = mysqlDate.substring(0, mysqlDate.length - 5);
+                vm.newQuestion.expirationDate = mysqlDate;
+                console.log("send", vm.newQuestion);
+            }
+            // QuestionDataSer.createQuestion(vm.newQuestion).then(function(result) {
+            //     console.log(result);
+            // });
+        }
+
+        function checkQuestionValidity(obj) {
+            var ret = _.every(obj, function(item) {
+                return item !== null;
+            });
+            return ret;
+        }
         /* New question */
 
         /* Edit question */

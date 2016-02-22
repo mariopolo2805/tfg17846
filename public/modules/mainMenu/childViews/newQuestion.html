@@ -1,37 +1,49 @@
-<div class="new-question-layout" ng-show="vm.tabActive === 2">
+<form class="new-question-layout" ng-show="vm.tabActive === 2" ng-submit="vm.sendQuestion()">
     <div class="new-question-text-content">
         <span class="new-question-text-title">Introduzca Enunciado:</span>
-        <textarea class="new-question-text-area" ng-model="vm.newQuestion.text"></textarea>
+        <textarea class="new-question-text-area" ng-model="vm.newQuestion.text" required></textarea>
     </div>
 
     <div class="new-question-answers-content">
         <span class="new-question-answers-title">Introduzca Respuestas:</span>
         <div class="new-question-answers-answer">
             <label class="new-question-answers-answer-label">A)</label>
-            <input type="text" class="new-question-answers-answer-input" ng-model="vm.newQuestion.a">
+            <input type="text" class="new-question-answers-answer-input" ng-model="vm.newQuestion.answer1" required>
         </div>
         <div class="new-question-answers-answer">
             <label class="new-question-answers-answer-label">B)</label>
-            <input type="text" class="new-question-answers-answer-input" ng-model="vm.newQuestion.b">
+            <input type="text" class="new-question-answers-answer-input" ng-model="vm.newQuestion.answer2" required>
         </div>
         <div class="new-question-answers-answer">
             <label class="new-question-answers-answer-label">C)</label>
-            <input type="text" class="new-question-answers-answer-input" ng-model="vm.newQuestion.c">
+            <input type="text" class="new-question-answers-answer-input" ng-model="vm.newQuestion.answer3" required>
         </div>
         <div class="new-question-answers-answer">
             <label class="new-question-answers-answer-label">D)</label>
-            <input type="text" class="new-question-answers-answer-input" ng-model="vm.newQuestion.c">
+            <input type="text" class="new-question-answers-answer-input" ng-model="vm.newQuestion.answer4" required>
         </div>
     </div>
 
     <div class="new-question-answers-options">
         <div class="new-question-answers-options-option">
             <span class="new-question-answers-options-title">Seleccione Respuesta Correcta:</span>
-            <select ng-options="item as item for item in vm.options track by item" class="new-question-answers-options-input" ng-model="vm.newQuestion.correct"></select>
+            <select ng-options="item as item for item in vm.options track by item" class="new-question-answers-options-input" ng-model="vm.newQuestion.solution" required></select>
         </div>
         <div class="new-question-answers-options-option">
             <span class="new-question-answers-options-title">Seleccione Dificultad:</span>
-            <input type="number" class="new-question-answers-options-input" min="0" max="4" ng-model="vm.newQuestion.difficulty">
+            <input type="number" class="new-question-answers-options-input" min="0" max="3" ng-model="vm.newQuestion.difficulty" required>
         </div>
     </div>
-</div>
+
+    <div class="new-question-buttons">
+        <div class="new-question-buttons-left">
+            <span>Establecer visible</span>
+            <input type="number" class="new-question-buttons-left-input" min="0" max="1440" ng-model="vm.newQuestion.minutes" required>
+            <span>minutos</span>
+        </div>
+        <button class="new-question-buttons-right">
+            <input type="submit" value="Crear">
+            <img src="resources/icons/create.png">
+        </button>
+    </div>
+</form>

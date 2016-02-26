@@ -265,10 +265,8 @@ define([], function() {
         delete vm.newQuestion.id;
         vm.newQuestion.solution = vm.options[0];
 
-
-
         vm.sendQuestion = function() {
-            if(checkQuestionValidity(vm.newQuestion)) {
+            if(vm.newQuestion.idSection === null) {
                 alert("Valide haber seleccionado el tema (en el panel izquierdo) al que asignarle la pregunta");
             } else {
                 var today = new Date();
@@ -276,19 +274,14 @@ define([], function() {
                 today.setHours(today.getHours() + 1);
                 var mysqlDate = today.toISOString();
                 mysqlDate = mysqlDate.substring(0, mysqlDate.length - 5);
-                vm.newQuestion.expirationDate = mysqlDate;
-                console.log("send", vm.newQuestion);
+                vm.newQuestion.expired = mysqlDate;
+                var exchangeModel = QuestionDataModel.getExchangeModel(vm.newQuestion);
+                QuestionDataSer.createQuestion(exchangeModel).then(function(result) {
+                    if(result === 200) {
+                        alert("Pregunta creada con éxito");
+                    }
+                });
             }
-            // QuestionDataSer.createQuestion(vm.newQuestion).then(function(result) {
-            //     console.log(result);
-            // });
-        }
-
-        function checkQuestionValidity(obj) {
-            var ret = _.every(obj, function(item) {
-                return item !== null;
-            });
-            return ret;
         }
         /* New question */
 

@@ -19,16 +19,32 @@ define(['angular'], function(angular) {
                 this.idSection = null;
                 this.text = null;
                 this.difficulty = null;
-                this.answer1 = null;
-                this.answer2 = null;
-                this.answer3 = null;
-                this.answer4 = null;
+                this.answerA = null;
+                this.answerB = null;
+                this.answerC = null;
+                this.answerD = null;
                 this.solution = null;
             }
         }
 
+        function getExchangeModel(obj) {
+            var json = {
+                idSection: obj.idSection,
+                text: obj.text,
+                difficulty: obj.difficulty,
+                answerA: obj.answerA,
+                answerB: obj.answerB,
+                answerC: obj.answerC,
+                answerD: obj.answerD,
+                solution: obj.solution,
+                expired: obj.expired
+            };
+            return json;
+        }
+
         return {
-            QuestionData: QuestionData
+            QuestionData: QuestionData,
+            getExchangeModel: getExchangeModel
         };
     }
 

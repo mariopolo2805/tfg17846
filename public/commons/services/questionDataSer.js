@@ -30,6 +30,16 @@ define(['angular'], function(angular) {
             });
         };
 
+        this.createQuestion = function(newQuestion) {
+            return $http({
+                url: 'http://localhost:9000/newQuestion',
+                method: 'POST',
+                data: newQuestion
+            }).then(function(result) {
+                return result.status;
+            });
+        };
+
     }
 
     angular

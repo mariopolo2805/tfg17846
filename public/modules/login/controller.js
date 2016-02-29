@@ -3,11 +3,13 @@ define(['crypto-js'], function(criptoJS) {
 
     function LoginCtrl($cookies, $state, UserDataModel, UserDataSer) {
         var vm = this;
+        vm.loading = false;
 
         vm.email = "";
         vm.password = "";
 
         vm.submit = function() {
+            vm.loading = true;
             UserDataSer.getUserData(vm.email).then(function(user) {
                 vm.user = new UserDataModel.UserData(user);
                 if(!vm.user.isTeacher) {
@@ -21,6 +23,7 @@ define(['crypto-js'], function(criptoJS) {
                     $cookies.putObject('user', vm.user, { expires : expired });
                     $state.go('wrapper.mainMenu.questionStats');
                 }
+                vm.loading = false;
             });
         }
 

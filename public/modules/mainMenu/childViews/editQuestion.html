@@ -1,4 +1,69 @@
 <div class="edit-question-layout" ng-show="vm.tabActive === 3">
-    <h2>Editar Pregunta</h2>
-    {{vm.tabActive}}
+    <div class="edit-question-select">
+        <span class="edit-question-select-title">Seleccione Pregunta:</span>
+        <select ng-show="vm.questions.length > 0" ng-options="item as item.title for item in vm.questions track by item.id" ng-model="vm.questionSelected"></select>
+        <select ng-show="vm.questions.length === 0"><option>Seleccione temas del menú izquierdo con preguntas asociadas</option></select>
+    </div>
+
+    <form>
+        <div class="edit-question-text-content">
+            <span class="edit-question-text-title">Editar Enunciado:</span>
+            <textarea class="edit-question-text-area" ng-model="vm.questionSelected.text" required></textarea>
+        </div>
+
+        <div class="edit-question-answers-content">
+            <span class="edit-question-answers-title">Editar Respuestas:</span>
+            <div class="edit-question-answers-answer">
+                <label class="edit-question-answers-answer-label">A)</label>
+                <input type="text" class="edit-question-answers-answer-input" ng-model="vm.questionSelected.answerA" required>
+            </div>
+            <div class="edit-question-answers-answer">
+                <label class="edit-question-answers-answer-label">B)</label>
+                <input type="text" class="edit-question-answers-answer-input" ng-model="vm.questionSelected.answerB" required>
+            </div>
+            <div class="edit-question-answers-answer">
+                <label class="edit-question-answers-answer-label">C)</label>
+                <input type="text" class="edit-question-answers-answer-input" ng-model="vm.questionSelected.answerC" required>
+            </div>
+            <div class="edit-question-answers-answer">
+                <label class="edit-question-answers-answer-label">D)</label>
+                <input type="text" class="edit-question-answers-answer-input" ng-model="vm.questionSelected.answerD" required>
+            </div>
+        </div>
+
+        <div class="edit-question-answers-options">
+            <div class="edit-question-answers-options-option">
+                <span class="edit-question-answers-options-title">Seleccione Respuesta Correcta:</span>
+                <select ng-options="item as item for item in vm.options track by item" class="edit-question-answers-options-input" ng-model="vm.questionSelected.solution" required></select>
+            </div>
+            <div class="edit-question-answers-options-option">
+                <span class="edit-question-answers-options-title">Seleccione Dificultad:</span>
+                <input type="number" class="edit-question-answers-options-input" min="1" max="3" ng-model="vm.questionSelected.difficulty" required>
+            </div>
+        </div>
+
+        <div class="edit-question-buttons">
+            <div class="edit-question-buttons-left">
+                <span>Establecer visible</span>
+                <input type="number" class="edit-question-buttons-left-input" min="0" max="1440" ng-model="vm.questionSelected.minutes" required>
+                <span>minutos</span>
+            </div>
+            <div class="edit-question-buttons-center">
+                <button class="danger">
+                    <input type="submit" class="danger" value="Eliminar">
+                    <img src="resources/icons/delete.png">
+                </button>
+                <button class="secondary">
+                    <input type="submit" class="secondary" value="Duplicar">
+                    <img src="resources/icons/copy.png">
+                </button>
+            </div>
+            <div class="edit-question-buttons-right">
+                <button>
+                    <input type="submit" value="Editar">
+                    <img src="resources/icons/edit.png">
+                </button>
+            </div>
+        </div>
+    </form>
 </div>

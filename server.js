@@ -242,7 +242,7 @@ app.post('/questionsOfSection/:id', function(req, res) {
 });
 
 app.post('/newQuestion', function(req, res) {
-    var query = "INSERT INTO tfg.Question (tfg.Question.idSection, tfg.Question.text, tfg.Question.difficulty, tfg.Question.answerA, tfg.Question.answerB, tfg.Question.answerC, tfg.Question.answerD, tfg.Question.solution, tfg.Question.expiration) VALUES (" + req.body.idSection + ", '" + req.body.text + "', " + req.body.difficulty + ", '" + req.body.answerA + "', '" + req.body.answerB + "', '" + req.body.answerC + "', '" + req.body.answerD + "', '" + req.body.solution + "', '" + req.body.expired + "')";
+    var query = "INSERT INTO tfg.Question (tfg.Question.idSection, tfg.Question.text, tfg.Question.difficulty, tfg.Question.answerA, tfg.Question.answerB, tfg.Question.answerC, tfg.Question.answerD, tfg.Question.solution, tfg.Question.expiration) VALUES (" + req.body.idSection + ", '" + req.body.text + "', " + req.body.difficulty + ", '" + req.body.answerA + "', '" + req.body.answerB + "', '" + req.body.answerC + "', '" + req.body.answerD + "', '" + req.body.solution + "', '" + req.body.expiration + "')";
     connection.query(query, function(err, result) {
         if(err) {
             console.error("Problem with MySQL" + err);

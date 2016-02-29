@@ -25,6 +25,8 @@
     - button
     - input[type="submit"]
 
++ Loading
+
 
 -------------------------------------------------------------------*/
 
@@ -121,7 +123,7 @@ ul {
 /*--  [Buttons]  --------------------------------------------------*/
 button, .button {
     .border-radius(10px);
-    padding: 6px 25px 4px 25px;
+    padding: 6px 12px 4px 12px;
     border: 1px solid @border;
     .typ18-400-white;
     text-decoration: none;
@@ -142,4 +144,62 @@ button:hover, .button:hover {
 input[type="submit"], input[type="button"] {
     background-color: @blue-medium;
     border: none;
+}
+
+/*-- Danger buttons --*/
+
+button.danger, .button.danger {
+    border: 1px solid @border-danger;
+    background-color: @danger;
+}
+button.danger:hover, .button.danger:hover {
+    background-color: @danger-dark;
+    input {
+        background-color: @danger-dark;
+    }
+}
+
+input[type="submit"].danger, input[type="button"].danger {
+    background-color: @danger;
+}
+
+/*-- Secondary buttons --*/
+
+button.secondary, .button.secondary {
+    border: 1px solid @white;
+    background-color: @grey-medium;
+}
+button.secondary:hover, .button.secondary:hover {
+    background-color: @grey-dark;
+    input {
+        background-color: @grey-dark;
+    }
+}
+
+input[type="submit"].secondary, input[type="button"].secondary {
+    background-color: @grey-medium;
+}
+
+/*--  [Loading]  ------------------------------------------------*/
+.loading {
+    width: 20px;
+    height: 20px;
+    border-radius: 15px;
+    border: 3px solid @white;
+    border-top-color: @blue-dark;
+    box-sizing: border-box;
+    animation: loading 1.2s linear infinite;
+    -webkit-animation: loading 1.2s linear infinite;
+}
+.loading.dark {
+    border: 3px solid @blue-dark;
+    border-top-color: @white;
+}
+@keyframes loading{
+    0%{transform: rotate(0deg)}
+    100%{transform: rotate(360deg)}
+}
+@-webkit-keyframes loading{
+    0%{-webkit-transform: rotate(0deg)}
+    100%{-webkit-transform: rotate(360deg)}
 }

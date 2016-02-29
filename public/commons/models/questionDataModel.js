@@ -14,6 +14,7 @@ define(['angular'], function(angular) {
                 this.answerC = json.answerC;
                 this.answerD = json.answerD;
                 this.solution = json.solution;
+                this.expiration = json.expiration;
             } else {
                 this.id = null;
                 this.idSection = null;
@@ -24,6 +25,7 @@ define(['angular'], function(angular) {
                 this.answerC = null;
                 this.answerD = null;
                 this.solution = null;
+                this.expiration = null;
             }
         }
 
@@ -37,7 +39,7 @@ define(['angular'], function(angular) {
                 answerC: obj.answerC,
                 answerD: obj.answerD,
                 solution: obj.solution,
-                expired: obj.expired
+                expiration: obj.expiration
             };
             return json;
         }

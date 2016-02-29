@@ -63,6 +63,7 @@ define([], function() {
 
         function getCheckList() {
             return _.filter(vm.sections, function(item) {
+                item.index = item.name[5];
                 return item.check;
             });
         }
@@ -114,7 +115,8 @@ define([], function() {
             } else if(vm.tabActive === 2) {
                 vm.onlyOneSection = true;
             } else if(vm.tabActive === 3) {
-                vm.onlyOneSection = true;
+                getQuestions();
+                vm.onlyOneSection = false;
             }
         }
 
@@ -134,12 +136,13 @@ define([], function() {
 
         /* Questions stats */
         function getQuestions() {
+            vm.questionSelected = null;
             vm.questions = [];
             vm.studentAnswers = [];
             var checkList = getCheckList();
             _.each(checkList, function(item, index) {
-                if(vm.tabActive === 0) {
-                    return getQuestionsOfSection(item.id);
+                if(vm.tabActive === 0 || vm.tabActive === 3) {
+                    return getQuestionsOfSection(item.id, item.index);
                 }
                 if(vm.tabActive === 1 && vm.studentSelected) {
                     return getAnswersOfStudentInSection(item.id);
@@ -150,11 +153,11 @@ define([], function() {
             }
         }
 
-        function getQuestionsOfSection(id) {
+        function getQuestionsOfSection(id, sectionIndex) {
             QuestionDataSer.getQuestionsOfSectionData(id).then(function(questions) {
                 var questionList = _.map(questions, function(question, index) {
                     var q = new QuestionDataModel.QuestionData(question);
-                    q.title = q.idSection + '.' + (index + 1) + ' - ' + q.text;
+                    q.title = sectionIndex + '.' + (index + 1) + ' - ' + q.text;
                     return q;
                 });
                 vm.questions = Array.prototype.concat(vm.questions, questionList);
@@ -274,7 +277,7 @@ define([], function() {
                 today.setHours(today.getHours() + 1);
                 var mysqlDate = today.toISOString();
                 mysqlDate = mysqlDate.substring(0, mysqlDate.length - 5);
-                vm.newQuestion.expired = mysqlDate;
+                vm.newQuestion.expiration = mysqlDate;
                 var exchangeModel = QuestionDataModel.getExchangeModel(vm.newQuestion);
                 QuestionDataSer.createQuestion(exchangeModel).then(function(result) {
                     if(result === 200) {

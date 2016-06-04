@@ -263,6 +263,18 @@ app.post('/editQuestion', function(req, res) {
     });
 });
 
+app.post('/removeQuestion/:id', function(req, res) {
+    var id = req.params.id;
+    var query = "DELETE FROM tfg.Question WHERE idQuestion='" + id + "'";
+    connection.query(query, function(err, result) {
+        if(err) {
+            console.error("Problem with MySQL" + err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
 /* Answer Queries */
 
 app.post('/answers', function(req, res) {

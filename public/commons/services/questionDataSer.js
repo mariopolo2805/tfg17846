@@ -50,6 +50,15 @@ define(['angular'], function(angular) {
             });
         };
 
+        this.removeQuestion = function(id) {
+            return $http({
+                url: 'http://localhost:9000/removeQuestion/' + id,
+                method: 'POST'
+            }).then(function(result) {
+                return result.status;
+            });
+        };
+
     }
 
     angular

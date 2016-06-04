@@ -330,7 +330,11 @@ define([], function() {
             vm.sendQuestion(vm.questionSelected);
         }
         function removeQuestion() {
-            console.log("remove");
+            QuestionDataSer.removeQuestion(vm.questionSelected.id).then(function(result) {
+                if(result === 200) {
+                    alert("Pregunta eliminada con éxito");
+                }
+            });
         }
         /* Edit question */
     }

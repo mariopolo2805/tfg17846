@@ -15,6 +15,9 @@ define(['angular'], function(angular) {
                 this.answerD = json.answerD;
                 this.solution = json.solution;
                 this.expiration = json.expiration;
+                var miliseconds = new Date(json.expiration).getTime() - (new Date()).getTime();
+                var minutes = Math.round(miliseconds / 60000);
+                this.minutes = minutes > 0 ? minutes : 0;
             } else {
                 this.id = null;
                 this.idSection = null;
@@ -26,6 +29,7 @@ define(['angular'], function(angular) {
                 this.answerD = null;
                 this.solution = null;
                 this.expiration = null;
+                this.minutes = null;
             }
         }
 

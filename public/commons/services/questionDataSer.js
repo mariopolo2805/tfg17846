@@ -40,6 +40,16 @@ define(['angular'], function(angular) {
             });
         };
 
+        this.editQuestion = function(question) {
+            return $http({
+                url: 'http://localhost:9000/editQuestion',
+                method: 'POST',
+                data: question
+            }).then(function(result) {
+                return result.status;
+            });
+        };
+
     }
 
     angular

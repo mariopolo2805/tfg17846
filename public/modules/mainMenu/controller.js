@@ -2,6 +2,8 @@ define([], function() {
     'use strict';
 
     function MainMenuCtrl(
+        $rootScope,
+        $timeout,
         $scope,
         $state,
         UserDataSer,
@@ -106,18 +108,24 @@ define([], function() {
                 item.check = false;
             });
 
-            if(vm.tabActive === 0) {
-                getQuestions();
-                vm.onlyOneSection = false;
-            } else if(vm.tabActive === 1) {
-                getStudents();
-                vm.onlyOneSection = false;
-            } else if(vm.tabActive === 2) {
-                vm.onlyOneSection = true;
-            } else if(vm.tabActive === 3) {
-                getQuestions();
-                vm.onlyOneSection = false;
+            switch(vm.tabActive) {
+                case 0:
+                case 3:
+                    getQuestions();
+                    vm.onlyOneSection = false;
+                    break;
+                case 1:
+                    getStudents();
+                    vm.onlyOneSection = false;
+                    break;
+                case 2:
+                    vm.onlyOneSection = true;
+                    break;
             }
+
+            $timeout(function() {
+                $rootScope.$apply();
+            }, 0);
         }
 
         vm.changeList = function() {
@@ -268,16 +276,26 @@ define([], function() {
         delete vm.newQuestion.id;
         vm.newQuestion.solution = vm.options[0];
 
-        vm.sendQuestion = function() {
+        vm.sendQuestion = function(question) {
+            if(angular.isDefined(question)) {
+                vm.newQuestion = question;
+            }
             if(vm.newQuestion.idSection === null) {
                 alert("Valide haber seleccionado el tema (en el panel izquierdo) al que asignarle la pregunta");
             } else {
-                var today = new Date();
-                today.setMinutes(today.getMinutes() + vm.newQuestion.minutes);
-                today.setHours(today.getHours() + 1);
-                var mysqlDate = today.toISOString();
-                mysqlDate = mysqlDate.substring(0, mysqlDate.length - 5);
-                vm.newQuestion.expiration = mysqlDate;
+                if(vm.newQuestion.expiration === null) {
+                    var today = new Date();
+                    today.setMinutes(today.getMinutes() + vm.newQuestion.minutes);
+                    today.setHours(today.getHours() + 1);
+                    vm.newQuestion.expiration = today;
+                } else {
+                    var date = new Date(vm.newQuestion.expiration);
+                    date.setMinutes(date.getMinutes() + vm.newQuestion.minutes);
+                    date.setHours(date.getHours() + 1);
+                    vm.newQuestion.expiration = date;
+                }
+                vm.newQuestion.expiration = vm.newQuestion.expiration.toISOString();
+                vm.newQuestion.expiration = vm.newQuestion.expiration.substring(0, vm.newQuestion.expiration.length - 5);
                 var exchangeModel = QuestionDataModel.getExchangeModel(vm.newQuestion);
                 QuestionDataSer.createQuestion(exchangeModel).then(function(result) {
                     if(result === 200) {
@@ -289,6 +307,31 @@ define([], function() {
         /* New question */
 
         /* Edit question */
+        vm.submitQuestion = function() {
+            switch (vm.submitType) {
+                case 'edit':
+                    return editQuestion();
+                case 'duplicate':
+                    return duplicateQuestion();
+                case 'remove':
+                    return removeQuestion();
+            }
+        }
+
+        function editQuestion() {
+            var exchangeModel = QuestionDataModel.getExchangeModel(vm.questionSelected);
+            QuestionDataSer.editQuestion(exchangeModel).then(function(result) {
+                if(result === 200) {
+                    alert("Pregunta editada con éxito");
+                }
+            });
+        }
+        function duplicateQuestion() {
+            vm.sendQuestion(vm.questionSelected);
+        }
+        function removeQuestion() {
+            console.log("remove");
+        }
         /* Edit question */
     }
 

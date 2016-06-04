@@ -252,6 +252,17 @@ app.post('/newQuestion', function(req, res) {
     });
 });
 
+app.post('/editQuestion', function(req, res) {
+    var query = "UPDATE tfg.Question SET tfg.Question.text = '" + req.body.text + "', tfg.Question.difficulty  = " + req.body.difficulty + ", tfg.Question.answerA = '" + req.body.answerA + "', tfg.Question.answerB = '" + req.body.answerB + "', tfg.Question.answerC = '" + req.body.answerC + "', tfg.Question.answerD = '" + req.body.answerD + "', tfg.Question.solution = '" + req.body.solution + "', tfg.Question.expiration = '" + req.body.expiration + "' WHERE tfg.Question.idQuestion = '" + req.body.idQuestion + "'";
+    connection.query(query, function(err, result) {
+        if(err) {
+            console.error("Problem with MySQL" + err);
+        } else {
+            res.send(result);
+        }
+    });
+});
+
 /* Answer Queries */
 
 app.post('/answers', function(req, res) {

@@ -5,7 +5,7 @@
         <select ng-show="vm.questions.length === 0"><option>Seleccione temas del menú izquierdo con preguntas asociadas</option></select>
     </div>
 
-    <form>
+    <form ng-submit="vm.submitQuestion()">
         <div class="edit-question-text-content">
             <span class="edit-question-text-title">Editar Enunciado:</span>
             <textarea class="edit-question-text-area" ng-model="vm.questionSelected.text" required></textarea>
@@ -45,21 +45,21 @@
         <div class="edit-question-buttons">
             <div class="edit-question-buttons-left">
                 <span>Establecer visible</span>
-                <input type="number" class="edit-question-buttons-left-input" min="0" max="1440" ng-model="vm.questionSelected.minutes" required>
+                <input type="number" class="edit-question-buttons-left-input" min="0" ng-model="vm.questionSelected.minutes" required>
                 <span>minutos</span>
             </div>
             <div class="edit-question-buttons-center">
-                <button class="danger">
+                <button class="danger" ng-click="vm.submitType = 'remove'">
                     <input type="submit" class="danger" value="Eliminar">
                     <img src="resources/icons/delete.png">
                 </button>
-                <button class="secondary">
+                <button class="secondary" ng-click="vm.submitType = 'duplicate'">
                     <input type="submit" class="secondary" value="Duplicar">
                     <img src="resources/icons/copy.png">
                 </button>
             </div>
             <div class="edit-question-buttons-right">
-                <button>
+                <button ng-click="vm.submitType = 'edit'">
                     <input type="submit" value="Editar">
                     <img src="resources/icons/edit.png">
                 </button>

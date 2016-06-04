@@ -7,6 +7,8 @@ define([
     angular
         .module('tfg.mainMenu', ['chart.js', 'ui.router'])
         .controller('MainMenuCtrl', [
+            '$rootScope',
+            '$timeout',
             '$scope',
             '$state',
             'UserDataSer',

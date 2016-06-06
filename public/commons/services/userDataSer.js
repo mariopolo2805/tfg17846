@@ -29,6 +29,10 @@ define(['angular'], function(angular) {
             }
             return user;
         };
+
+        this.deleteUserCookie = function() {
+            $cookies.remove('user');
+        };
     }
 
     angular

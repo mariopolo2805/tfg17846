@@ -35,7 +35,17 @@ define([], function() {
 
         /* User */
         vm.user = UserDataSer.getUserCookie();
+        $rootScope.user = vm.user;
         /* User */
+
+        /* Close sesion */
+        vm.closeSesion = function() {
+            delete vm.user;
+            delete $rootScope.user;
+            UserDataSer.deleteUserCookie();
+        }
+        /* Close sesion */
+        if(!vm.user) { return null; }
 
         /* Group with subject of teacher */
         GroupDataSer.getGroupsWithSubjectOfTeacherData(vm.user.id).then(function(subjects) {

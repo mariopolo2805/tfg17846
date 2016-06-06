@@ -34,7 +34,13 @@
 
     <aside>
         <div class="menu-options">
-            Right
+            <span class="menu-options-title">Usuario</span>
+            <span class="menu-options-username">{{vm.user.name}} {{vm.user.surname}}</span>
+        </div>
+        <div class="menu-options">
+            <span class="menu-options-title">Administración</span>
+            <a class="menu-options-link" href="#">Gestión de Datos</a>
+            <a class="menu-options-link" ui-sref="wrapper.login" ng-click="vm.closeSesion()">Cerrar Sesión</a>
         </div>
     </aside>
 </div>

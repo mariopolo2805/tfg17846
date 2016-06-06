@@ -89,6 +89,21 @@ header {
     background: @topbar;
     border: 1px solid @border;
     .typ22-600-white;
+
+    .header-content {
+        .flex-display();
+        .justify-content(center);
+        .align-items(center);
+        min-width: 980px;
+        position: relative;
+
+        .header-content-user {
+            position: absolute;
+            right: 0;
+            bottom: 2px;
+            .typ14-400-white;
+        }
+    }
 }
 
 footer {

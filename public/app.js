@@ -1,12 +1,13 @@
 define([
     'angular',
+    './wrapper/controller',
     'ui-bootstrap',
     'commons/services/main',
     'commons/models/main',
     'modules/landingPage/main',
     'modules/login/main',
     'modules/mainMenu/main'
-], function(angular) {
+], function(angular, controller) {
     'use strict';
 
     return angular.module('app', [
@@ -18,6 +19,7 @@ define([
         'tfg.login',
         'tfg.mainMenu'
     ])
+    .controller('TopbarCtrl', ['$rootScope', controller.TopbarCtrl])
     .config(function($stateProvider, $urlRouterProvider) {
 
         $urlRouterProvider.otherwise("/landingPage");
@@ -32,12 +34,14 @@ define([
                     },
                     'wrapper-top@wrapper': {
                         templateUrl : 'wrapper/wrapper-top.html',
+                        controller: 'TopbarCtrl',
+                        controllerAs: 'vm'
                     },
                     'wrapper-content@wrapper': {
                         template: '<ui-view></ui-view>'
                     },
                     'wrapper-foot@wrapper': {
-                        templateUrl : 'wrapper/wrapper-foot.html',
+                        templateUrl : 'wrapper/wrapper-foot.html'
                     }
                 }
             });

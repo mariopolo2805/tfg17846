@@ -25,6 +25,14 @@
         </div>
     </div>
 
+    <div class="question-stats-dates" ng-show="vm.questions.length > 0">
+        <span class="question-stats-dates-date">Fecha de expiración: {{vm.questionSelected.expiration.toLocaleDateString()}}</span>
+        <span class="question-stats-dates-expiration">Expirada:
+            <span ng-if="vm.questionSelected.expired">Sí</span>
+            <span ng-if="!vm.questionSelected.expired">No</span>
+        </span>
+    </div>
+
     <div class="question-stats-graph" ng-show="vm.questions.length > 0 && vm.answers.length > 0">
         <canvas id="pie" class="chart chart-pie"
             chart-data="vm.rates" chart-labels="vm.labels" chart-legend="true" chart-colours="vm.colors">
@@ -41,7 +49,7 @@
                 <img src="resources/icons/sad32.png">No sabe / No contesta {{vm.rates[2]}}
             </div>
             <div class="question-stats-graph-percent">
-                <span>Total de Respuestas: </span>{{vm.sum}}
+                <span>Total de Respuestas: </span>{{vm.sum}}/{{vm.students.length}}
             </div>
         </div>
     </div>

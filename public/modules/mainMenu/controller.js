@@ -159,7 +159,7 @@ define([], function() {
             vm.studentAnswers = [];
             var checkList = getCheckList();
             _.each(checkList, function(item, index) {
-                if(vm.tabActive === 0 || vm.tabActive === 3) {
+                if(vm.tabActive !== 2 || vm.tabActive === 1 || vm.tabActive === 3) {
                     return getQuestionsOfSection(item.id, item.index);
                 }
                 if(vm.tabActive === 1 && vm.studentSelected) {
@@ -180,30 +180,45 @@ define([], function() {
                 });
                 vm.questions = Array.prototype.concat(vm.questions, questionList);
                 vm.questionSelected = vm.questions[vm.questions.length - 1];
+                if(vm.tabActive === 1) {
+                    getAnswersOfStudentInSection(id);
+                }
             });
         };
 
         function getAnswersOfStudentInSection(id) {
             AnswerDataSer.getAnswersOfStudentInSectionData(vm.studentSelected.id, id).then(function(items) {
-                var answerList = _.map(items, function(item, index) {
-                    var q = new QuestionDataModel.QuestionData(item);
-                    q.title = q.idSection + '.' + (index + 1) + ' - ' + q.text;
-                    q.selection = item.selection;
-                    vm.questions.push(q);
+                vm.studentAnswers = _.map(items, function(item, index) {
                     var a = new AnswerDataModel.AnswerData(item);
                     a.solution = item.solution;
+                    var found = _.find(vm.questions, function(q) {
+                        return q.id === a.idQuestion;
+                    });
+                    if(found) {
+                        found.selection = a.selection;
+                        found.selection = a.selection;
+                    }
                     return a;
                 });
-                vm.questionSelected = vm.questions[vm.questions.length - 1];
-                vm.studentAnswers = Array.prototype.concat(vm.studentAnswers, answerList);
+                if(vm.studentAnswers.length !== vm.questions.length) {
+                    _.each(vm.questions, function(item) {
+                        var found = _.find(vm.studentAnswers, function(a) {
+                            return a.idQuestion === item.id;
+                        });
+                        if(!found && item.expired) {
+                            var a = new AnswerDataModel.AnswerData();
+                            vm.studentAnswers.push(a);
+                        }
+                    });
+                }
                 calculateStudentRates();
             });
         };
 
         $scope.$watch(
             "vm.questionSelected",
-            function handleFooChange(newValue, oldValue) {
-                if(vm.questionSelected) {
+            function handleQuestionSelectedChange(newValue, oldValue) {
+                if(vm.questionSelected && vm.tabActive !== 1) {
                     getAnswers();
                 }
             }
@@ -218,6 +233,7 @@ define([], function() {
                     calculateQuestionRates();
                 }
             });
+            getStudents();
         }
 
         function calculateQuestionRates() {
@@ -242,20 +258,28 @@ define([], function() {
         /* Student stats */
         function getStudents() {
             vm.students = [];
-            UserDataSer.getStudentsOfSubjectData(vm.groups[vm.groupActive].idSubject).then(function(students) {
+            UserDataSer.getStudentsOfGroupData(vm.groups[vm.groupActive].id).then(function(students) {
                 vm.students = _.map(students, function(student, index) {
                     var s = new UserDataModel.UserData(student);
                     s.title = (index + 1) + ' - ' + s.surname + ', ' + s.name;
                     return s;
                 });
                 vm.studentSelected = vm.students[vm.students.length - 1];
+                /* In case of expirated question, search all students didn't answer */
+                if (vm.questionSelected && vm.questionSelected.expired) {
+                    var answer = new AnswerDataModel.AnswerData(answer);
+                    for (var i = vm.answers.length; i < vm.students.length; i++) {
+                        vm.answers.push(answer);
+                    }
+                    calculateQuestionRates();
+                }
             });
         }
 
         $scope.$watch(
             "vm.studentSelected",
-            function handleFooChange(newValue, oldValue) {
-                if(vm.studentSelected) {
+            function handleStudentSelectedChange(newValue, oldValue) {
+                if(vm.studentSelected && vm.tabActive === 1) {
                     getQuestions();
                 }
             }

@@ -12,9 +12,9 @@ define(['angular'], function(angular) {
             });
         };
 
-        this.getStudentsOfSubjectData = function(id) {
+        this.getStudentsOfGroupData = function(id) {
             return $http({
-                url: 'http://localhost:9000/studentsOfSubject/' + id,
+                url: 'http://localhost:9000/studentsOfGroup/' + id,
                 method: 'POST'
             }).then(function(result) {
                 return result.data;

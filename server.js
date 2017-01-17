@@ -26,9 +26,9 @@ app.use('/lib', express.static('node_modules'));
  ******************************************************************************/
 
 /* Create the server in http://localhost:9000/ */
-var server = app.listen(9000, function () {
+var server = app.listen(9000, "0.0.0.0", function () {
     var port = server.address().port;
-    console.log('Server listening at http://localhost:%s', port);
+    console.log('Server listening at http://0.0.0.0:%s', port);
 });
 
 /******************************************************************************
@@ -68,9 +68,9 @@ app.post('/login/:user', function(req, res) {
 
 /* Student Queries */
 
-app.post('/studentsOfSubject/:id', function(req, res) {
+app.post('/studentsOfGroup/:id', function(req, res) {
     var id = req.params.id;
-    var query = "SELECT tfg.User.idUser, tfg.User.name, tfg.User.surname FROM tfg.User INNER JOIN tfg.Tuition ON tfg.User.idUser=tfg.Tuition.idStudent INNER JOIN tfg.Subject ON tfg.Tuition.idSubject=tfg.Subject.idSubject WHERE tfg.Subject.idSubject='" + id + "'  ORDER BY tfg.User.surname";
+    var query = "SELECT tfg.User.idUser, tfg.User.name, tfg.User.surname FROM tfg.User INNER JOIN tfg.Tuition ON tfg.User.idUser=tfg.Tuition.idStudent INNER JOIN tfg.Group ON tfg.Tuition.idGroup=tfg.Group.idGroup WHERE tfg.Group.idGroup='" + id + "' ORDER BY tfg.User.surname";
     connection.query(query, function(err, rows) {
         if(err) {
             console.error("Problem with MySQL" + err);
@@ -325,6 +325,75 @@ app.post('/answersOfStudent/:id/section/:idSection', function(req, res) {
         } else {
             var json = JSON.stringify(rows);
             res.send(json);
+        }
+    });
+});
+
+/***** Android App Queries *****/
+
+app.get('/groupsOfStudent/:id', function(req, res) {
+    var id = req.params.id;
+    var query = "SELECT * FROM tfg.Tuition INNER JOIN tfg.Group ON tfg.Group.idGroup=tfg.Tuition.idGroup INNER JOIN tfg.Subject ON tfg.Subject.idSubject=tfg.Group.idSubject WHERE idStudent='" + id + "'";
+    connection.query(query, function(err, rows) {
+        if(err) {
+            console.error("Problem with MySQL" + err);
+        } else {
+            var json = JSON.stringify(rows);
+            res.send(json);
+        }
+    });
+});
+
+app.get('/sectionsOfGroup/:id', function(req, res) {
+    var id = req.params.id;
+    var query = "SELECT * FROM tfg.Section WHERE idGroup='" + id + "'";
+    connection.query(query, function(err, rows) {
+        if(err) {
+            console.error("Problem with MySQL" + err);
+        } else {
+            var json = JSON.stringify(rows);
+            res.send(json);
+        }
+    });
+});
+
+app.get('/questionsOfStudent/:id/section/:idSection', function(req, res) {
+    var id = req.params.id;
+    var idSection = req.params.idSection;
+    var query = "SELECT * FROM tfg.User INNER JOIN tfg.Tuition ON tfg.User.idUser=tfg.Tuition.idStudent INNER JOIN tfg.Group ON tfg.Tuition.idGroup=tfg.Group.idGroup INNER JOIN tfg.Section ON tfg.Group.idGroup=tfg.Section.idGroup INNER JOIN tfg.Question ON tfg.Section.idSection=tfg.Question.idSection WHERE tfg.Tuition.idStudent='" + id + "' AND tfg.Section.idSection='" + idSection + "' AND expiration >= CURDATE()";
+    connection.query(query, function(err, rows) {
+        if(err) {
+            console.error("Problem with MySQL" + err);
+        } else {
+            var json = JSON.stringify(rows);
+            res.send(json);
+        }
+    });
+});
+
+app.get('/answersOfStudent/:id/section/:idSection', function(req, res) {
+    var id = req.params.id;
+    var idSection = req.params.idSection;
+    var query = "SELECT * FROM tfg.Answer INNER JOIN tfg.User ON tfg.Answer.idStudent=tfg.User.idUser INNER JOIN tfg.Tuition ON tfg.User.idUser=tfg.Tuition.idStudent INNER JOIN tfg.Group ON tfg.Tuition.idGroup=tfg.Group.idGroup INNER JOIN tfg.Section ON tfg.Group.idGroup=tfg.Section.idGroup INNER JOIN tfg.Question ON tfg.Answer.idQuestion=tfg.Question.idQuestion AND tfg.Section.idSection=tfg.Question.idSection WHERE tfg.Tuition.idStudent='" + id + "' AND tfg.Section.idSection='" + idSection + "';";
+    connection.query(query, function(err, rows) {
+        if(err) {
+            console.error("Problem with MySQL" + err);
+        } else {
+            var json = JSON.stringify(rows);
+            res.send(json);
+        }
+    });
+});
+
+app.post('/newAnswer', function(req, res) {
+    var idStudent = req.body.idStudent;
+    var idQuestion = req.body.idQuestion;
+    var query = "INSERT INTO tfg.Answer (tfg.Answer.idStudent, tfg.Answer.idQuestion, tfg.Answer.selection, tfg.Answer.time) VALUES (" + req.body.idStudent + ", '" + req.body.idQuestion + "', '" + req.body.selection + "', '" + req.body.time + "')";
+    connection.query(query, function(err, result) {
+        if(err) {
+            console.error("Problem with MySQL" + err);
+        } else {
+            res.send(result);
         }
     });
 });

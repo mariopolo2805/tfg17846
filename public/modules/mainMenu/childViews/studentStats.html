@@ -68,10 +68,13 @@
                 <img src="resources/icons/wrong.png" class="icon-wrong" ng-show="(vm.questionSelected.selection === 'D') && (vm.questionSelected.selection !== vm.questionSelected.solution)">
             </div>
         </div>
-
     </div>
 
-    <div class="student-stats-advice" ng-show="vm.students.length > 0 && vm.isAnyChecked && vm.studentAnswers.length > 0 && !vm.questionSelected.selection">
+    <div class="student-stats-advice" ng-show="vm.students.length > 0 && vm.isAnyChecked && vm.studentAnswers.length > 0 && !vm.questionSelected.selection && !vm.questionSelected.expired">
+        <span>Fecha de expiración: {{vm.questionSelected.expiration.toLocaleDateString()}}</span>
+    </div>
+
+    <div class="student-stats-advice" ng-show="vm.students.length > 0 && vm.isAnyChecked && vm.studentAnswers.length > 0 && !vm.questionSelected.selection && vm.questionSelected.expired">
         <img src="resources/icons/sad.png" class="icon-sad">
         <i>No sabe / No contesta</i>
     </div>

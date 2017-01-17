@@ -38,6 +38,16 @@ define(['angular'], function(angular) {
                 return result.data;
             });
         };
+
+        this.getUnansweredQuestionsOfStudentInSectionData = function(id, idSection) {
+            return $http({
+                url: 'http://localhost:9000/unansweredQuestionsOfStudent/' + id + '/section/' + idSection,
+                method: 'POST'
+            }).then(function(result) {
+                return result.data;
+            });
+        };
+
     }
 
     angular

@@ -360,7 +360,7 @@ app.get('/sectionsOfGroup/:id', function(req, res) {
 app.get('/questionsOfStudent/:id/section/:idSection', function(req, res) {
     var id = req.params.id;
     var idSection = req.params.idSection;
-    var query = "SELECT * FROM tfg.User INNER JOIN tfg.Tuition ON tfg.User.idUser=tfg.Tuition.idStudent INNER JOIN tfg.Group ON tfg.Tuition.idGroup=tfg.Group.idGroup INNER JOIN tfg.Section ON tfg.Group.idGroup=tfg.Section.idGroup INNER JOIN tfg.Question ON tfg.Section.idSection=tfg.Question.idSection WHERE tfg.Tuition.idStudent='" + id + "' AND tfg.Section.idSection='" + idSection + "' AND expiration >= CURDATE()";
+    var query = "SELECT * FROM tfg.User INNER JOIN tfg.Tuition ON tfg.User.idUser=tfg.Tuition.idStudent INNER JOIN tfg.Group ON tfg.Tuition.idGroup=tfg.Group.idGroup INNER JOIN tfg.Section ON tfg.Group.idGroup=tfg.Section.idGroup INNER JOIN tfg.Question ON tfg.Section.idSection=tfg.Question.idSection WHERE tfg.Tuition.idStudent='" + id + "' AND tfg.Section.idSection='" + idSection + "'";
     connection.query(query, function(err, rows) {
         if(err) {
             console.error("Problem with MySQL" + err);
@@ -388,7 +388,9 @@ app.get('/answersOfStudent/:id/section/:idSection', function(req, res) {
 app.post('/newAnswer', function(req, res) {
     var idStudent = req.body.idStudent;
     var idQuestion = req.body.idQuestion;
-    var query = "INSERT INTO tfg.Answer (tfg.Answer.idStudent, tfg.Answer.idQuestion, tfg.Answer.selection, tfg.Answer.time) VALUES (" + req.body.idStudent + ", '" + req.body.idQuestion + "', '" + req.body.selection + "', '" + req.body.time + "')";
+    var selection = req.body.selection ? "'" + req.body.selection + "'" : null;
+    var time = req.body.time;
+    var query = "INSERT INTO tfg.Answer (tfg.Answer.idStudent, tfg.Answer.idQuestion, tfg.Answer.selection, tfg.Answer.time) VALUES (" + idStudent + ", '" + idQuestion + "', " + selection + ", '" + time + "')";
     connection.query(query, function(err, result) {
         if(err) {
             console.error("Problem with MySQL" + err);

@@ -26,7 +26,7 @@
     </div>
 
     <div class="question-stats-dates" ng-show="vm.questions.length > 0">
-        <span class="question-stats-dates-date">Fecha de expiración: {{vm.questionSelected.expiration.toLocaleDateString()}}</span>
+        <span class="question-stats-dates-date">Fecha de expiración: {{vm.questionSelected.expiration.toLocaleDateString()}} {{vm.questionSelected.expiration.toLocaleTimeString()}}</span>
         <span class="question-stats-dates-expiration">Expirada:
             <span ng-if="vm.questionSelected.expired">Sí</span>
             <span ng-if="!vm.questionSelected.expired">No</span>

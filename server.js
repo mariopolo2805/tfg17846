@@ -28,7 +28,7 @@ app.use('/lib', express.static('node_modules'));
 /* Create the server in http://localhost:9000/ */
 var server = app.listen(9000, "0.0.0.0", function () {
     var port = server.address().port;
-    console.log('Server listening at http://0.0.0.0:%s', port);
+    console.log('Server up!');
 });
 
 /******************************************************************************

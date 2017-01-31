@@ -37,10 +37,10 @@ var server = app.listen(9000, "0.0.0.0", function () {
 
 var mysql = require('mysql');
 var connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'mariopolo2805',
+    host     : 'tfg.c2j7nutmc0hf.eu-central-1.rds.amazonaws.com', //localhost
+    user     : 'mariopolo2805', //mariopolo2805
     password : 'tfg17846',
-    database : 'tfg'
+    database : 'tfg' //tfg
 });
 
 /******************************************************************************

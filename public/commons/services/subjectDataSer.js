@@ -5,7 +5,7 @@ define(['angular'], function(angular) {
 
         this.getSubjectsData = function() {
             return $http({
-                url: 'http://localhost:9000/subjects',
+                url: '/subjects',
                 method: 'POST'
             }).then(function(result) {
                 return result.data;
@@ -14,7 +14,7 @@ define(['angular'], function(angular) {
 
         this.getSubjectData = function(id) {
             return $http({
-                url: 'http://localhost:9000/subject/' + id,
+                url: '/subject/' + id,
                 method: 'POST'
             }).then(function(result) {
                 return result.data;

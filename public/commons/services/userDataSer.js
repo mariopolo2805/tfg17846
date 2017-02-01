@@ -5,7 +5,7 @@ define(['angular'], function(angular) {
 
         this.getUserData = function(email) {
             return $http({
-                url: 'http://localhost:9000/login/' + email,
+                url: '/login/' + email,
                 method: 'POST'
             }).then(function(result) {
                 return result.data;
@@ -14,7 +14,7 @@ define(['angular'], function(angular) {
 
         this.getStudentsOfGroupData = function(id) {
             return $http({
-                url: 'http://localhost:9000/studentsOfGroup/' + id,
+                url: '/studentsOfGroup/' + id,
                 method: 'POST'
             }).then(function(result) {
                 return result.data;

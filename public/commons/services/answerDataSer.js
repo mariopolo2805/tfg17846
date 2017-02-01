@@ -5,7 +5,7 @@ define(['angular'], function(angular) {
 
         this.getAnswersData = function() {
             return $http({
-                url: 'http://localhost:9000/answers',
+                url: '/answers',
                 method: 'POST'
             }).then(function(result) {
                 return result.data;
@@ -14,7 +14,7 @@ define(['angular'], function(angular) {
 
         this.getAnswerData = function(id) {
             return $http({
-                url: 'http://localhost:9000/answer/' + id,
+                url: '/answer/' + id,
                 method: 'POST'
             }).then(function(result) {
                 return result.data;
@@ -23,7 +23,7 @@ define(['angular'], function(angular) {
 
         this.getAnswersOfQuestionData = function(id) {
             return $http({
-                url: 'http://localhost:9000/answersOfQuestion/' + id,
+                url: '/answersOfQuestion/' + id,
                 method: 'POST'
             }).then(function(result) {
                 return result.data;
@@ -32,7 +32,7 @@ define(['angular'], function(angular) {
 
         this.getAnswersOfStudentInSectionData = function(id, idSection) {
             return $http({
-                url: 'http://localhost:9000/answersOfStudent/' + id + '/section/' + idSection,
+                url: '/answersOfStudent/' + id + '/section/' + idSection,
                 method: 'POST'
             }).then(function(result) {
                 return result.data;
@@ -41,7 +41,7 @@ define(['angular'], function(angular) {
 
         this.getUnansweredQuestionsOfStudentInSectionData = function(id, idSection) {
             return $http({
-                url: 'http://localhost:9000/unansweredQuestionsOfStudent/' + id + '/section/' + idSection,
+                url: '/unansweredQuestionsOfStudent/' + id + '/section/' + idSection,
                 method: 'POST'
             }).then(function(result) {
                 return result.data;

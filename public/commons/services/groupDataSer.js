@@ -5,7 +5,7 @@ define(['angular'], function(angular) {
 
         this.getGroupsData = function() {
             return $http({
-                url: 'http://localhost:9000/groups',
+                url: '/groups',
                 method: 'POST'
             }).then(function(result) {
                 return result.data;
@@ -14,7 +14,7 @@ define(['angular'], function(angular) {
 
         this.getGroupData = function(id) {
             return $http({
-                url: 'http://localhost:9000/group/' + id,
+                url: '/group/' + id,
                 method: 'POST'
             }).then(function(result) {
                 return result.data;
@@ -23,7 +23,7 @@ define(['angular'], function(angular) {
 
         this.getGroupsOfTeacherData = function(id) {
             return $http({
-                url: 'http://localhost:9000/groupsOfTeacher/' + id,
+                url: '/groupsOfTeacher/' + id,
                 method: 'POST'
             }).then(function(result) {
                 return result.data;
@@ -32,7 +32,7 @@ define(['angular'], function(angular) {
 
         this.getGroupsWithSubjectOfTeacherData = function(id) {
             return $http({
-                url: 'http://localhost:9000/groupsWithSubjectOfTeacher/' + id,
+                url: '/groupsWithSubjectOfTeacher/' + id,
                 method: 'POST'
             }).then(function(result) {
                 return result.data;

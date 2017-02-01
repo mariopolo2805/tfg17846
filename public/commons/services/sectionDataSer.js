@@ -5,7 +5,7 @@ define(['angular'], function(angular) {
 
         this.getSectionsData = function() {
             return $http({
-                url: 'http://localhost:9000/sections',
+                url: '/sections',
                 method: 'POST'
             }).then(function(result) {
                 return result.data;
@@ -14,7 +14,7 @@ define(['angular'], function(angular) {
 
         this.getSectionData = function(id) {
             return $http({
-                url: 'http://localhost:9000/section/' + id,
+                url: '/section/' + id,
                 method: 'POST'
             }).then(function(result) {
                 return result.data;
@@ -23,7 +23,7 @@ define(['angular'], function(angular) {
 
         this.getSectionsOfGroupData = function(id) {
             return $http({
-                url: 'http://localhost:9000/sectionsOfGroup/' + id,
+                url: '/sectionsOfGroup/' + id,
                 method: 'POST'
             }).then(function(result) {
                 return result.data;

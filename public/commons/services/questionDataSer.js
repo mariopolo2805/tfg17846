@@ -5,7 +5,7 @@ define(['angular'], function(angular) {
 
         this.getQuestionsData = function() {
             return $http({
-                url: 'http://localhost:9000/questions',
+                url: '/questions',
                 method: 'POST'
             }).then(function(result) {
                 return result.data;
@@ -14,7 +14,7 @@ define(['angular'], function(angular) {
 
         this.getQuestionData = function(id) {
             return $http({
-                url: 'http://localhost:9000/question/' + id,
+                url: '/question/' + id,
                 method: 'POST'
             }).then(function(result) {
                 return result.data;
@@ -23,7 +23,7 @@ define(['angular'], function(angular) {
 
         this.getQuestionsOfSectionData = function(id) {
             return $http({
-                url: 'http://localhost:9000/questionsOfSection/' + id,
+                url: '/questionsOfSection/' + id,
                 method: 'POST'
             }).then(function(result) {
                 return result.data;
@@ -32,7 +32,7 @@ define(['angular'], function(angular) {
 
         this.createQuestion = function(newQuestion) {
             return $http({
-                url: 'http://localhost:9000/newQuestion',
+                url: '/newQuestion',
                 method: 'POST',
                 data: newQuestion
             }).then(function(result) {
@@ -42,7 +42,7 @@ define(['angular'], function(angular) {
 
         this.editQuestion = function(question) {
             return $http({
-                url: 'http://localhost:9000/editQuestion',
+                url: '/editQuestion',
                 method: 'POST',
                 data: question
             }).then(function(result) {
@@ -52,7 +52,7 @@ define(['angular'], function(angular) {
 
         this.removeQuestion = function(id) {
             return $http({
-                url: 'http://localhost:9000/removeQuestion/' + id,
+                url: '/removeQuestion/' + id,
                 method: 'POST'
             }).then(function(result) {
                 return result.status;

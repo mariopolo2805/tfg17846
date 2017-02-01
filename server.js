@@ -37,6 +37,7 @@ var server = app.listen(process.env.PORT || 9000, function () {
 
 var mysql = require('mysql');
 var connection = mysql.createConnection({
+    port     : '3306',
     host     : 'tfg.c2j7nutmc0hf.eu-central-1.rds.amazonaws.com', //localhost
     user     : 'mariopolo2805', //mariopolo2805
     password : 'tfg17846',

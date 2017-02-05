@@ -17,7 +17,7 @@ define(['angular'], function(angular) {
                 this.expiration = new Date(json.expiration);
                 this.expired = this.expiration < new Date();
                 var miliseconds = new Date(json.expiration).getTime() - (new Date()).getTime();
-                var minutes = Math.round(miliseconds / 60000);
+                var minutes = Math.round(miliseconds / 60000) - 60;
                 this.minutes = minutes > 0 ? minutes : 0;
             } else {
                 this.id = null;
@@ -51,7 +51,7 @@ define(['angular'], function(angular) {
 
         function getEditExchangeModel(obj) {
             var expiration = new Date();
-            expiration.setMinutes(expiration.getMinutes() - expiration.getTimezoneOffset() + obj.minutes);
+            expiration.setMinutes(expiration.getMinutes() - 60 + obj.minutes);
             var json = {
                 idQuestion: obj.id,
                 text: obj.text,

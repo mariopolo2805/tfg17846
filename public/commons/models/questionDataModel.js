@@ -51,7 +51,7 @@ define(['angular'], function(angular) {
 
         function getEditExchangeModel(obj) {
             var expiration = new Date();
-            expiration.setMinutes(expiration.getMinutes() - 60 + obj.minutes);
+            expiration.setMinutes(expiration.getMinutes() - expiration.getTimezoneOffset() + obj.minutes);
             var json = {
                 idQuestion: obj.id,
                 text: obj.text,

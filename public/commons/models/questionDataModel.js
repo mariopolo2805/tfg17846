@@ -49,9 +49,27 @@ define(['angular'], function(angular) {
             return json;
         }
 
+        function getEditExchangeModel(obj) {
+            var expiration = new Date();
+            expiration.setMinutes(expiration.getMinutes() - expiration.getTimezoneOffset() + obj.minutes);
+            var json = {
+                idQuestion: obj.id,
+                text: obj.text,
+                difficulty: obj.difficulty,
+                answerA: obj.answerA,
+                answerB: obj.answerB,
+                answerC: obj.answerC,
+                answerD: obj.answerD,
+                solution: obj.solution,
+                expiration: expiration
+            };
+            return json;
+        }
+
         return {
             QuestionData: QuestionData,
-            getExchangeModel: getExchangeModel
+            getExchangeModel: getExchangeModel,
+            getEditExchangeModel: getEditExchangeModel
         };
     }
 

@@ -353,7 +353,7 @@ define([], function() {
         }
 
         function editQuestion() {
-            var exchangeModel = QuestionDataModel.getExchangeModel(vm.questionSelected);
+            var exchangeModel = QuestionDataModel.getEditExchangeModel(vm.questionSelected);
             QuestionDataSer.editQuestion(exchangeModel).then(function(result) {
                 if(result === 200) {
                     alert("Pregunta editada con éxito");

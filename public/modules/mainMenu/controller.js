@@ -130,6 +130,7 @@ define([], function() {
                     break;
                 case 2:
                     vm.onlyOneSection = true;
+                    vm.isAnyChecked = false;
                     break;
             }
 

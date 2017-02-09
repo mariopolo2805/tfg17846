@@ -15,9 +15,10 @@ define(['angular'], function(angular) {
                 this.answerD = json.answerD;
                 this.solution = json.solution;
                 this.expiration = new Date(json.expiration);
+                this.expiration.setMinutes(this.expiration.getMinutes() + this.expiration.getTimezoneOffset());
                 this.expired = this.expiration < new Date();
                 var miliseconds = new Date(json.expiration).getTime() - (new Date()).getTime();
-                var minutes = Math.round(miliseconds / 60000) - 60;
+                var minutes = Math.round(miliseconds / 60000);
                 this.minutes = minutes > 0 ? minutes : 0;
             } else {
                 this.id = null;

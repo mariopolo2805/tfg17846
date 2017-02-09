@@ -70,7 +70,7 @@
         </div>
     </div>
 
-    <div class="student-stats-advice" ng-show="vm.students.length > 0 && vm.isAnyChecked && vm.studentAnswers.length > 0 && !vm.questionSelected.selection || vm.questionSelected.expired">
+    <div class="student-stats-advice" ng-show="vm.students.length > 0 && vm.isAnyChecked && vm.studentAnswers.length > 0 && !vm.questionSelected.answered && vm.questionSelected.expired || vm.students.length > 0 && vm.isAnyChecked && vm.studentAnswers.length > 0 && vm.questionSelected.answered && vm.questionSelected.nsnc">
         <img src="resources/icons/sad.png" class="icon-sad">
         <i>No sabe / No contesta</i>
     </div>

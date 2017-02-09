@@ -197,7 +197,8 @@ define([], function() {
                     });
                     if(found) {
                         found.selection = a.selection;
-                        found.selection = a.selection;
+                        found.answered = a['selection'] !== undefined;
+                        found.nsnc = a['selection'] !== undefined && !a.selection;
                     }
                     return a;
                 });

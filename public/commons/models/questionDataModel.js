@@ -19,7 +19,7 @@ define(['angular'], function(angular) {
                 this.expired = this.expiration < new Date();
                 var miliseconds = new Date(json.expiration).getTime() - (new Date()).getTime();
                 var minutes = Math.round(miliseconds / 60000);
-                this.minutes = minutes > 0 ? minutes : 0 + this.expiration.getTimezoneOffset();
+                this.minutes = minutes > 0 ? minutes + this.expiration.getTimezoneOffset() : 0;
             } else {
                 this.id = null;
                 this.idSection = null;

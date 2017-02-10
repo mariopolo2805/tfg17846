@@ -80,6 +80,11 @@ define([], function() {
             });
         }
 
+        vm.toggleCheckbox = function(checkbox) {
+            checkbox.check = !checkbox.check;
+            vm.clickCheck();
+        }
+
         vm.clickCheck = function() {
             getQuestions();
             vm.changeList();
@@ -161,7 +166,7 @@ define([], function() {
             var checkList = getCheckList();
             _.each(checkList, function(item, index) {
                 if(vm.tabActive !== 2 || vm.tabActive === 1 || vm.tabActive === 3) {
-                    return getQuestionsOfSection(item.id, item.index);
+                    return getQuestionsOfSection(item.id, item.index, index === (checkList.length - 1));
                 }
                 if(vm.tabActive === 1 && vm.studentSelected) {
                     return getAnswersOfStudentInSection(item.id);
@@ -172,7 +177,7 @@ define([], function() {
             }
         }
 
-        function getQuestionsOfSection(id, sectionIndex) {
+        function getQuestionsOfSection(id, sectionIndex, isLast) {
             QuestionDataSer.getQuestionsOfSectionData(id).then(function(questions) {
                 var questionList = _.map(questions, function(question, index) {
                     var q = new QuestionDataModel.QuestionData(question);
@@ -182,14 +187,14 @@ define([], function() {
                 vm.questions = Array.prototype.concat(vm.questions, questionList);
                 vm.questionSelected = vm.questions[vm.questions.length - 1];
                 if(vm.tabActive === 1) {
-                    getAnswersOfStudentInSection(id);
+                    getAnswersOfStudentInSection(id, isLast);
                 }
             });
         };
 
-        function getAnswersOfStudentInSection(id) {
+        function getAnswersOfStudentInSection(id, isLast) {
             AnswerDataSer.getAnswersOfStudentInSectionData(vm.studentSelected.id, id).then(function(items) {
-                vm.studentAnswers = _.map(items, function(item, index) {
+                var studentAnswers = _.map(items, function(item, index) {
                     var a = new AnswerDataModel.AnswerData(item);
                     a.solution = item.solution;
                     var found = _.find(vm.questions, function(q) {
@@ -202,7 +207,8 @@ define([], function() {
                     }
                     return a;
                 });
-                if(vm.studentAnswers.length !== vm.questions.length) {
+                vm.studentAnswers = Array.prototype.concat(vm.studentAnswers, studentAnswers);
+                if((vm.studentAnswers.length !== vm.questions.length) && isLast) {
                     _.each(vm.questions, function(item) {
                         var found = _.find(vm.studentAnswers, function(a) {
                             return a.idQuestion === item.id;
@@ -213,7 +219,9 @@ define([], function() {
                         }
                     });
                 }
-                calculateStudentRates();
+                if(isLast) {
+                    calculateStudentRates();
+                }
             });
         };
 

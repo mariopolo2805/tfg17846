@@ -50,6 +50,7 @@
             border-bottom: 1px dotted @black;
             margin-bottom: 5px;
             padding-bottom: 5px;
+            cursor: default;
         }
 
         ul {
@@ -70,6 +71,10 @@
                     .flex-direction(row);
                     .justify-content(space-between);
                     .align-items(center);
+                    cursor: default;
+                    span {
+                        .flex-grow(1);
+                    }
                 }
             }
         }

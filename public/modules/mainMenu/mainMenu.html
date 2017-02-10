@@ -9,12 +9,12 @@
         <div class="menu-options">
             <span class="menu-options-title">Temas</span>
             <div class="menu-options-selectAll">
-                <span ng-class="{'typ12-400-grey-light' : vm.onlyOneSection}">Seleccionar todos</span>
+                <span ng-class="{'typ12-400-grey-light' : vm.onlyOneSection}" ng-click="!(vm.sections.length === 0 || vm.onlyOneSection) && vm.checkAll()">Seleccionar todos</span>
                 <input type="checkbox" ng-click="vm.checkAll()" ng-checked="vm.allChecked()" ng-disabled="vm.sections.length === 0 || vm.onlyOneSection">
             </div>
             <ul>
                 <li class="check" ng-repeat="section in vm.sections track by $index">
-                    <span>{{section.name}}</span>
+                    <span ng-click="!(vm.isAnyChecked && vm.onlyOneSection && !vm.sections[$index].check) && vm.toggleCheckbox(vm.sections[$index])">{{section.name}}</span>
                     <input type="checkbox" ng-model="vm.sections[$index].check" ng-click="vm.clickCheck()" ng-disabled="vm.isAnyChecked && vm.onlyOneSection && !vm.sections[$index].check">
                 </li>
             </ul>
@@ -39,7 +39,6 @@
         </div>
         <div class="menu-options">
             <span class="menu-options-title">Administración</span>
-            <a class="menu-options-link" href="#">Gestión de Datos</a>
             <a class="menu-options-link" ui-sref="wrapper.login" ng-click="vm.closeSesion()">Cerrar Sesión</a>
         </div>
     </aside>

@@ -42,7 +42,50 @@
             </div>
         </div>
 
-        <div class="edit-question-buttons">
+        <div class="edit-question-end">
+            <div class="edit-question-dates">
+                <div class="edit-question-dates-activation">
+                    <span>Fecha de activación</span>
+                    <div class="edit-question-dates-activation-inputs">
+                        <input type="number" ng-model="vm.questionSelected.dateActivation.day" min="1" max="{{vm.questionSelected.dateActivation.maxDay}}" ng-change="vm.questionSelected.dateActivation.maxDay = vm.setMaxDate(vm.questionSelected.dateActivation)">&nbsp;/&nbsp;
+                        <input type="number" ng-model="vm.questionSelected.dateActivation.month" min="1" max="12" ng-change="vm.questionSelected.dateActivation.maxDay = vm.setMaxDate(vm.questionSelected.dateActivation)">&nbsp;/&nbsp;
+                        <input type="number" ng-model="vm.questionSelected.dateActivation.year" min="2017" max="2067" ng-change="vm.questionSelected.dateActivation.maxDay = vm.setMaxDate(vm.questionSelected.dateActivation)">&nbsp;-&nbsp;
+                        <input type="number" ng-model="vm.questionSelected.dateActivation.hour" min="0" max="23">&nbsp;H&nbsp;
+                        <input type="number" ng-model="vm.questionSelected.dateActivation.minutes" min="0" max="59">&nbsp;M
+                    </div>
+                </div>
+                <div class="edit-question-dates-expiration">
+                    <span>Fecha de expiración</span>
+                    <div class="edit-question-dates-expiration-inputs">
+                        <input type="number" ng-model="vm.questionSelected.dateExpiration.day" min="1" max="{{vm.questionSelected.dateExpiration.maxDay}}" ng-change="vm.questionSelected.dateExpiration.maxDay = vm.setMaxDate(vm.questionSelected.dateExpiration)">&nbsp;/&nbsp;
+                        <input type="number" ng-model="vm.questionSelected.dateExpiration.month" min="1" max="12" ng-change="vm.questionSelected.dateExpiration.maxDay = vm.setMaxDate(vm.questionSelected.dateExpiration)">&nbsp;/&nbsp;
+                        <input type="number" ng-model="vm.questionSelected.dateExpiration.year" min="2017" max="2067" ng-change="vm.questionSelected.dateExpiration.maxDay = vm.setMaxDate(vm.questionSelected.dateExpiration)">&nbsp;-&nbsp;
+                        <input type="number" ng-model="vm.questionSelected.dateExpiration.hour" min="0" max="23">&nbsp;H&nbsp;
+                        <input type="number" ng-model="vm.questionSelected.dateExpiration.minutes" min="0" max="59">&nbsp;M
+                    </div>
+                </div>
+            </div>
+            <div class="edit-question-buttons">
+                <div class="edit-question-buttons-top">
+                    <button class="danger" ng-click="vm.submitType = 'remove'">
+                        <input type="submit" class="danger" value="Eliminar">
+                        <img src="resources/icons/delete.png">
+                    </button>
+                    <button class="secondary" ng-click="vm.submitType = 'duplicate'">
+                        <input type="submit" class="secondary" value="Duplicar">
+                        <img src="resources/icons/copy.png">
+                    </button>
+                </div>
+                <div class="edit-question-buttons-bottom">
+                    <button ng-click="vm.submitType = 'edit'">
+                        <input type="submit" value="Editar">
+                        <img src="resources/icons/edit.png">
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="edit-question-buttons">
             <div class="edit-question-buttons-left">
                 <span>Establecer visible</span>
                 <input type="number" class="edit-question-buttons-left-input" min="0" ng-model="vm.questionSelected.minutes" required>
@@ -64,6 +107,6 @@
                     <img src="resources/icons/edit.png">
                 </button>
             </div>
-        </div>
+        </div> -->
     </form>
 </div>

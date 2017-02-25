@@ -93,38 +93,61 @@
         }
     }
 
-    .edit-question-buttons {
+    .edit-question-end {
         .flex-display();
         .flex-direction(row);
         .align-items(center);
         .justify-content(space-between);
-
         padding: 5px 20px 15px 20px;
 
-        .edit-question-buttons-left {
+        .edit-question-dates {
+            .flex-display();
+            .flex-direction(column);
             margin: 0 5px;
 
-            .edit-question-buttons-left-input {
-                width: 75px;
-                text-align: right;
+            .edit-question-dates-activation {
+                .edit-question-dates-activation-inputs {
+                    .flex-display();
+                    .flex-direction(row);
+                    .align-items(center);
+                    margin: 5px 0 15px 0;
+                    input:first-child {
+                        max-width: 41px;
+                    }
+                }
+            }
+            .edit-question-dates-expiration {
+                .edit-question-dates-expiration-inputs {
+                    .flex-display();
+                    .flex-direction(row);
+                    .align-items(center);
+                    margin-top: 5px;
+                    input:first-child {
+                        max-width: 41px;
+                    }
+                }
             }
         }
-
-        .edit-question-buttons-center {
+        .edit-question-buttons {
             .flex-display();
-            .flex-direction(row);
-            .align-items(center);
-
-            .secondary {
-                margin-left: 5px;
-            }
-        }
-
-        .edit-question-buttons-right {
-            .flex-display();
-            .flex-direction(row);
-            .align-items(center);
+            .flex-direction(column);
+            .align-items(flex-end);
             margin: 0 5px;
+
+            .edit-question-buttons-top {
+                .flex-display();
+                .flex-direction(row);
+                .align-items(center);
+                margin-bottom: 10px;
+
+                .secondary {
+                    margin-left: 5px;
+                }
+            }
+
+            .edit-question-buttons-bottom {
+
+            }
         }
     }
 }

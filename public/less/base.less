@@ -154,6 +154,9 @@ button, .button {
         top: 1px;
     }
 }
+button:focus {
+    outline: 0;
+}
 button:hover, .button:hover {
     background-color: @blue-dark;
     input {
@@ -164,6 +167,9 @@ button:hover, .button:hover {
 input[type="submit"], input[type="button"] {
     background-color: @blue-medium;
     border: none;
+}
+input[type="submit"]:focus, input[type="button"]:focus {
+    outline: 0;
 }
 
 /*-- Danger buttons --*/

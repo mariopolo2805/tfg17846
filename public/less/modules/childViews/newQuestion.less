@@ -81,23 +81,42 @@
         }
     }
 
-    .new-question-buttons {
+    .new-question-end {
         .flex-display();
         .flex-direction(row);
         .align-items(center);
         .justify-content(space-between);
         padding: 5px 20px 15px 20px;
 
-        .new-question-buttons-left {
+        .new-question-dates {
+            .flex-display();
+            .flex-direction(column);
             margin: 0 5px;
 
-            .new-question-buttons-left-input {
-                width: 75px;
-                text-align: right;
+            .new-question-dates-activation {
+                .new-question-dates-activation-inputs {
+                    .flex-display();
+                    .flex-direction(row);
+                    .align-items(center);
+                    margin: 5px 0 15px 0;
+                    input:first-child {
+                        max-width: 41px;
+                    }
+                }
+            }
+            .new-question-dates-expiration {
+                .new-question-dates-expiration-inputs {
+                    .flex-display();
+                    .flex-direction(row);
+                    .align-items(center);
+                    margin-top: 5px;
+                    input:first-child {
+                        max-width: 41px;
+                    }
+                }
             }
         }
-
-        .new-question-buttons-right {
+        .new-question-button {
             margin: 0 5px;
         }
     }

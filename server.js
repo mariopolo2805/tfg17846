@@ -243,7 +243,7 @@ app.post('/questionsOfSection/:id', function(req, res) {
 });
 
 app.post('/newQuestion', function(req, res) {
-    var query = "INSERT INTO tfg.Question (tfg.Question.idSection, tfg.Question.text, tfg.Question.difficulty, tfg.Question.answerA, tfg.Question.answerB, tfg.Question.answerC, tfg.Question.answerD, tfg.Question.solution, tfg.Question.expiration) VALUES (" + req.body.idSection + ", '" + req.body.text + "', " + req.body.difficulty + ", '" + req.body.answerA + "', '" + req.body.answerB + "', '" + req.body.answerC + "', '" + req.body.answerD + "', '" + req.body.solution + "', '" + req.body.expiration + "')";
+    var query = "INSERT INTO tfg.Question (tfg.Question.idSection, tfg.Question.text, tfg.Question.difficulty, tfg.Question.answerA, tfg.Question.answerB, tfg.Question.answerC, tfg.Question.answerD, tfg.Question.solution, tfg.Question.expiration, tfg.Question.activation) VALUES (" + req.body.idSection + ", '" + req.body.text + "', " + req.body.difficulty + ", '" + req.body.answerA + "', '" + req.body.answerB + "', '" + req.body.answerC + "', '" + req.body.answerD + "', '" + req.body.solution + "', '" + req.body.expiration + "', '" + req.body.activation + "')";
     connection.query(query, function(err, result) {
         if(err) {
             console.error("Problem with MySQL" + err);
@@ -254,7 +254,7 @@ app.post('/newQuestion', function(req, res) {
 });
 
 app.post('/editQuestion', function(req, res) {
-    var query = "UPDATE tfg.Question SET tfg.Question.text = '" + req.body.text + "', tfg.Question.difficulty  = " + req.body.difficulty + ", tfg.Question.answerA = '" + req.body.answerA + "', tfg.Question.answerB = '" + req.body.answerB + "', tfg.Question.answerC = '" + req.body.answerC + "', tfg.Question.answerD = '" + req.body.answerD + "', tfg.Question.solution = '" + req.body.solution + "', tfg.Question.expiration = '" + req.body.expiration + "' WHERE tfg.Question.idQuestion = '" + req.body.idQuestion + "'";
+    var query = "UPDATE tfg.Question SET tfg.Question.text = '" + req.body.text + "', tfg.Question.difficulty  = " + req.body.difficulty + ", tfg.Question.answerA = '" + req.body.answerA + "', tfg.Question.answerB = '" + req.body.answerB + "', tfg.Question.answerC = '" + req.body.answerC + "', tfg.Question.answerD = '" + req.body.answerD + "', tfg.Question.solution = '" + req.body.solution + "', tfg.Question.expiration = '" + req.body.expiration + "', tfg.Question.activation = '" + req.body.activation + "' WHERE tfg.Question.idQuestion = '" + req.body.idQuestion + "'";
     connection.query(query, function(err, result) {
         if(err) {
             console.error("Problem with MySQL" + err);

@@ -320,6 +320,10 @@ define([], function() {
         delete vm.newQuestion.id;
         vm.newQuestion.solution = vm.options[0];
 
+        vm.setMaxDate = function(dateActivation) {
+            return QuestionDataModel.setMaxDate(dateActivation);
+        }
+
         vm.sendQuestion = function(question) {
             if(angular.isDefined(question)) {
                 vm.newQuestion = question;
@@ -327,32 +331,23 @@ define([], function() {
             if(vm.newQuestion.idSection === null) {
                 alert("Valide haber seleccionado el tema (en el panel izquierdo) al que asignarle la pregunta");
             } else {
-                if(vm.newQuestion.expiration === null) {
-                    var today = new Date();
-                    today.setMinutes(today.getMinutes() + vm.newQuestion.minutes);
-                    today.setHours(today.getHours() + 1);
-                    vm.newQuestion.expiration = today;
-                } else {
-                    var date = new Date(vm.newQuestion.expiration);
-                    date.setMinutes(date.getMinutes() + vm.newQuestion.minutes);
-                    date.setHours(date.getHours() + 1);
-                    vm.newQuestion.expiration = date;
-                }
-                vm.newQuestion.expiration = vm.newQuestion.expiration.toISOString();
-                vm.newQuestion.expiration = vm.newQuestion.expiration.substring(0, vm.newQuestion.expiration.length - 5);
                 var exchangeModel = QuestionDataModel.getExchangeModel(vm.newQuestion);
-                QuestionDataSer.createQuestion(exchangeModel).then(function(result) {
-                    if(result === 200) {
-                        alert("Pregunta creada con éxito");
-                    }
-                });
+                if(exchangeModel === "errValidDates") {
+                    alert("La fecha de activación no puede ser posterior (o igual) a la fecha de expiración");
+                } else {
+                    QuestionDataSer.createQuestion(exchangeModel).then(function(result) {
+                        if(result === 200) {
+                            alert("Pregunta creada con éxito");
+                        }
+                    });
+                }
             }
         }
         /* New question */
 
         /* Edit question */
         vm.submitQuestion = function() {
-            switch (vm.submitType) {
+            switch(vm.submitType) {
                 case 'edit':
                     return editQuestion();
                 case 'duplicate':
@@ -363,12 +358,16 @@ define([], function() {
         }
 
         function editQuestion() {
-            var exchangeModel = QuestionDataModel.getEditExchangeModel(vm.questionSelected);
-            QuestionDataSer.editQuestion(exchangeModel).then(function(result) {
-                if(result === 200) {
-                    alert("Pregunta editada con éxito");
-                }
-            });
+            var exchangeModel = QuestionDataModel.getExchangeModel(vm.questionSelected);
+            if(exchangeModel === "errValidDates") {
+                alert("La fecha de activación no puede ser posterior (o igual) a la fecha de expiración");
+            } else {
+                QuestionDataSer.editQuestion(exchangeModel).then(function(result) {
+                    if(result === 200) {
+                        alert("Pregunta editada con éxito");
+                    }
+                });
+            }
         }
         function duplicateQuestion() {
             vm.sendQuestion(vm.questionSelected);

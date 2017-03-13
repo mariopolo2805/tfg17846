@@ -27,16 +27,16 @@ Existen 7 tablas:
 ![Diagrama ER](/tfg17846.png)
 
 #### ¿Cómo realizar una ingesta masiva de datos?
-Se proporcionan CSV de ejemplo en la carpeta */database* para ver el formato que se espera. Una vez completado el CSV, nos tendremos que conectar a la base de datos y ejecutar el siguiente comando:
+Se proporcionan CSV de ejemplo (no se soportan acentos ni caracteres extraños) en la carpeta */database* para ver el formato que se espera. Una vez completado el CSV, nos tendremos que conectar a la base de datos y ejecutar el siguiente comando:
 
 ```sh
-LOAD DATA LOCAL INFILE '/absolutePath/file.csv' INTO TABLE table FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 ROWS;
+LOAD DATA LOCAL INFILE '/absolutePath/file.csv' INTO TABLE tfg.table FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 ROWS;
 ```
 
 Por ejemplo:
 
 ```sh
-LOAD DATA LOCAL INFILE '/Users/mariopolo2805/Desktop/user.csv' INTO TABLE User FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 ROWS;
+LOAD DATA LOCAL INFILE '/Users/mariopolo2805/Desktop/user.csv' INTO TABLE tfg.User FIELDS TERMINATED BY ',' ENCLOSED BY '"' LINES TERMINATED BY '\n' IGNORE 1 ROWS;
 ```
 
 #### ¿Cómo matricular a un alumno en una asignatura nueva?
@@ -44,7 +44,7 @@ Siguiendo estos pasos (también se puede llevar a cabo de manera masiva con el a
  - Lo primero será registrar al alumno en la base de datos
  - Seguidamente tendremos que registrar la asignatura
  - A continuación creamos los grupos asociados a esa asignatura
- - Generamos la matrícula de dicho alumna en la asignatura
+ - Generamos la matrícula de dicho alumno en la asignatura
  - Finalmente damos de alta tantos temas como necesitemos
 
 A partir de aquí la UI soporta todo tipo de operaciones de consulta sobre estas entidades, además de edición total sobre Preguntas.

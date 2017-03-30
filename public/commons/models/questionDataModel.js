@@ -15,7 +15,9 @@ define(['angular'], function(angular) {
                 this.answerD = json.answerD;
                 this.solution = json.solution;
                 this.expiration = new Date(json.expiration);
+                this.expiration.setMinutes(this.expiration.getMinutes() + this.expiration.getTimezoneOffset());
                 this.activation = new Date(json.activation);
+                this.activation.setMinutes(this.activation.getMinutes() + this.activation.getTimezoneOffset());
                 this.expired = this.expiration < new Date();
                 this.dateActivation = {
                     maxDay: 1,

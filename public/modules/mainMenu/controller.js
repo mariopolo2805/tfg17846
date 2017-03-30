@@ -247,21 +247,23 @@ define([], function() {
         }
 
         function calculateQuestionRates() {
-            vm.rates = [0, 0, 0];
-            _.each(vm.answers, function(answer) {
-                if(answer.selection === null) {
-                    vm.rates[2]++;
-                } else if(answer.selection === vm.questionSelected.solution) {
-                    vm.rates[0]++;
-                } else {
-                    vm.rates[1]++;
-                }
-            });
-            vm.sum = vm.rates[0] + vm.rates[1] + vm.rates[2];
-            vm.percentRight = Math.round((vm.rates[0] * 100 / vm.sum) * 100) / 100;
-            vm.percentWrong = Math.round((vm.rates[1] * 100 / vm.sum) * 100) / 100;
-            vm.percentNoAnswer = Math.round((vm.rates[2] * 100 / vm.sum) * 100) / 100;
-            vm.labels = [vm.percentRight + '%', vm.percentWrong + '%', vm.percentNoAnswer + '%'];
+            if(vm.questionSelected) {
+                vm.rates = [0, 0, 0];
+                _.each(vm.answers, function(answer) {
+                    if(answer.selection === null) {
+                        vm.rates[2]++;
+                    } else if(answer.selection === vm.questionSelected.solution) {
+                        vm.rates[0]++;
+                    } else {
+                        vm.rates[1]++;
+                    }
+                });
+                vm.sum = vm.rates[0] + vm.rates[1] + vm.rates[2];
+                vm.percentRight = Math.round((vm.rates[0] * 100 / vm.sum) * 100) / 100;
+                vm.percentWrong = Math.round((vm.rates[1] * 100 / vm.sum) * 100) / 100;
+                vm.percentNoAnswer = Math.round((vm.rates[2] * 100 / vm.sum) * 100) / 100;
+                vm.labels = [vm.percentRight + '%', vm.percentWrong + '%', vm.percentNoAnswer + '%'];
+            }
         }
         /* Questions stats */
 
